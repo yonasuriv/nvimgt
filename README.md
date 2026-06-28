@@ -16,16 +16,29 @@ d8P' `?8b  88b`?888P'  d88' d88' d88'  88b
 - **[AstroNvim](https://github.com/AstroNvim/AstroNvim)**'s gorgeous **AstroDark** colors and top buffer/tab bar
 - **[NvChad](https://github.com/NvChad/NvChad)**'s clean, informative statusline
 
-## Install
+## Setup
+
+### Test it
+
+```
+# This will clone it to a side-by-side config name, so you can test it without blowing away your current nvim config
+git clone https://github.com/yonasuriv/xlvim ~/.config/xlvim
+NVIM_APPNAME=xlvim nvim
+```
+
+### Install it
+
+When you are ready to make it your main config:
 
 ```bash
 # Backup your existing Neovim config (optional)
 mv ~/.config/nvim ~/.config/nvim.bak
 
 # Clone XLVIM
-git clone https://github.com/YOUR_USERNAME/xlvim ~/.config/nvim
+git clone https://github.com/yonasuriv/xlvim ~/.config/nvim
 
-# Start Neovim — lazy.nvim will bootstrap everything
+# Start Neovim
+# The first launch will boostrap lazy.nvim and install everything automatically
 nvim
 ```
 
