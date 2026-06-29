@@ -58,7 +58,7 @@ nvimGT ships with a curated plugin stack focused on speed, aesthetics, and pract
 | `:menu` | Lazy plugin manager |
 | `:theme` | base46 theme picker |
 | `:extras` | LazyVim optional packs |
-| `:reload` | Reset shipped `config.json` extras state |
+| `:reload` | Delete `config.json` extras state (created after `:extras`; restart after) |
 | `:cheatsheet` | NvChad keymap cheatsheet |
 | `<leader>e` / `<C-n>` | Open file explorer |
 
@@ -173,7 +173,7 @@ The short version:
 - **Keymaps** —  add to `lua/nvimgt/config/keymaps.lua`
 - **Autocommands** — add to `lua/nvimgt/config/autocmds.lua`.
 - **UI / themes** — add to `lua/themes/`, main config in `lua/nvimgt/config/theme.lua`
-- **Extras** — run `:extras` to browse and enable lazyvim extras and language/tool support packs.
+- **Extras** — run `:extras` to browse and enable lazyvim extras and language/tool support packs. State is saved to `config.json` in your Neovim config directory (created on first use).
 
 ## Development
 
@@ -198,12 +198,10 @@ NVIM_APPNAME=nvimgt nvim # or nvimgt if you've set up the alias
 ```
 nvimGT/
 ├── init.lua                    # Neovim entry point
-├── config.json                 # LazyVim extras state (:extras; reset with :reload)
+├── CONTRIBUTING.md             # Contribution guidelines
 ├── scripts/
 │   ├── install.sh              # curl | bash installer
 │   └── sync.sh                 # Dev helper: sync working dir → ~/.config/nvimgt
-├── docs/
-│   └── spec/                   # architecture, configuration, development
 └── lua/
     ├── themes/                 # Custom base46 themes
     │   ├── astrodark.lua
@@ -232,13 +230,7 @@ nvimGT/
             └── cheatsheet/     # Fullscreen keymap cheatsheet
 ```
 
-## Documentation
-
-- [Architecture](docs/spec/architecture.md)
-- [Configuration](docs/spec/configuration.md)
-- [Development](docs/spec/development.md)
-
-### Recommended resources
+## Recommended resources
 
 - [Neovim Docs](https://neovim.io/doc/)
 - [lazy.nvim Docs](https://lazy.folke.io/)

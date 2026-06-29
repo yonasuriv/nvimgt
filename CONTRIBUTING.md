@@ -25,10 +25,10 @@ Open an issue with:
 
 **No breaking changes to the core design without discussion.** The nvimGT UI layer (base46 + NvChad/ui tabufline/statusline + Snacks dashboard) is intentional.
 
-**Respect the plugin loading model.** Use lazy.nvim's spec merge system (opts, keys, dependencies) rather than adding init scripts or patching third-party plugin files. See [docs/configuration.md](docs/configuration.md) for how the merge model works.
+**Respect the plugin loading model.** Use lazy.nvim's spec merge system (opts, keys, dependencies) rather than adding init scripts or patching third-party plugin files. See the [Customizing](README.md#customizing) section in the README.
 
 **Lua style.** Follow the conventions in the existing files: no trailing comments describing what the code does (let the code speak), and no large comment blocks. Format with StyLua.
 
 ## Development Workflow
 
-See [docs/development.md](docs/development.md) for the full dev setup, sync script usage, and debugging tips.
+See [Development](README.md#development) in the README for sync script usage and testing.
