@@ -240,6 +240,7 @@ nvimGT/
 
 ### Recommended resources
 
+- [Neovim Docs](https://neovim.io/doc/)
 - [lazy.nvim Docs](https://lazy.folke.io/)
 - [LazyVim Docs](https://www.lazyvim.org/)
 - [AstroNvim Docs](https://docs.astronvim.com/)
