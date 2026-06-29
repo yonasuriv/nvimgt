@@ -1,12 +1,10 @@
 <div align="center" id="madewithlua">
   <picture>
     <source media="(prefers-color-scheme: light)" srcset=".github/assets/nvimgt-dark.png">
-    <source media="(prefers-color-scheme: white)" srcset=".github/assets/nvimgt-white.png">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/nvimgt-white.png">
     <img src=".github/assets/nvimgt-dark.png" alt="nvimGT">
   </picture>
 </div>
-
-
 
 ## Description
 
