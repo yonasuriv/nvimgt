@@ -11,10 +11,10 @@
 nvimGT is a fast, aesthetic, and extensible Neovim distribution with a refined UI, strong defaults, and a carefully selected plugin set. It is designed to provide a smooth out-of-the-box experience with lazy-load-first plugin management powered by [lazy.nvim](https://github.com/folke/lazy.nvim), while supporting the broader LazyVim plugin ecosystem. 
 
 > [!NOTE]
-> This project started as a personal experiment after years of working with [Overleaf](https://github.com/overleaf/overleaf), Lua, LaTeX, and LuaLaTeX-based editing workflows. \
-> It is derived from and inspired by the work of [LazyVim](https://github.com/LazyVim/LazyVim), [AstronNvim](https://github.com/astronvim/astronvim) and [NvChad](https://github.com/NvChad/NvChad).
->
-> nvimGT should be treated as a personal Neovim configuration distribution. It is not intended to replace, supersede, or diminish any of the projects it builds on or takes inspiration from.
+> nvimGT started as a personal experiment after years of working with [Overleaf](https://github.com/overleaf/overleaf), Lua, LaTeX, and LuaLaTeX-based editing workflows \
+> and it is derived from, and inspired by, the work of [LazyVim](https://github.com/LazyVim/LazyVim), [AstronNvim](https://github.com/astronvim/astronvim) and [NvChad](https://github.com/NvChad/NvChad).
+> 
+> Having said this, nvimGT should be treated as a personal Neovim configuration distribution as it is not intended to replace, supersede, or diminish any of the projects it builds on or takes inspiration from in any way.
 
 > New to Neovim config? See [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
 
