@@ -31,18 +31,18 @@ NVIM_APPNAME=nvimgt nvim --headless -c "qa" 2>&1   # no output = clean start
 | `:lazy` / `:Lazy` | lazy.nvim plugin manager |
 | `:extras` / `:LazyExtras` | Toggle upstream LazyVim extras |
 | `:die` / `:bye` / `:qa` | Quit (`:die!` / `:bye!` = `:qa!`) |
-| `:NvimgtFresh` | Delete `config.json` to reset extras (restart after) |
+| `:reload` | Delete `config.json` to reset extras (restart after) |
 | `:checkhealth nvimgt` | nvimGT health checks |
 | `:LspInfo` | Active LSP clients |
 
-**How aliases work:** `lua/nvimgt/util/commands.lua` is the single implementation. Typing `:lazy` at the `:` prompt uses a cmdline abbreviation (`lazy` → `Lazy`). Dashboard keys call the same module via `:lua require('nvimgt.util.commands').lazy()` etc. `:Lazy` / `:LazyExtras` still work as upstream names.
+**How aliases work:** `lua/nvimgt/utils/commands.lua` is the single implementation. Typing `:lazy` at the `:` prompt uses a cmdline abbreviation (`lazy` → `Lazy`). Dashboard keys call the same module via `:lua require('nvimgt.utils.commands').lazy()` etc. `:Lazy` / `:LazyExtras` still work as upstream names.
 
 ## Project structure
 
 ```
 nvimgt/
 ├── init.lua
-├── config.json                 # Shipped extras state (LazyVim; reset with :NvimgtFresh)
+├── config.json                 # Shipped extras state (LazyVim; reset with :reload)
 ├── .stylua.toml
 ├── reference/lazyvim/       # upstream snapshots (not loaded)
 ├── scripts/sync-nvimgt.sh
@@ -63,8 +63,8 @@ nvimgt/
         ├── dashboard.lua
         ├── gitsigns.lua
         ├── mason.lua
-        ├── statusline.lua
-        ├── tabline.lua
+        ├── nvchad-ui.lua
+        ├── colorscheme.lua
         └── treesitter.lua
 ```
 

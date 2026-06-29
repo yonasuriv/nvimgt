@@ -9,7 +9,7 @@
 | **lazyload** | nvimGT term for **deferred plugin loading** (`lazy = true` in specs, event/cmd/keys triggers) |
 | **LazyVim** | Upstream distribution layer (LSP, extras, core specs) — credited in README; nvimGT branding in UI |
 
-> **Commands:** `:lazy`, `:extras`, `:die`, `:bye` — see `lua/nvimgt/util/commands.lua`. Typed aliases use cmdline abbreviations; dashboard uses the same Lua helpers. `:Lazy` / `:LazyExtras` remain valid upstream names.
+> **Commands:** `:lazy`, `:extras`, `:reload`, `:die`, `:bye` — see `lua/nvimgt/utils/commands.lua`. Typed aliases use cmdline abbreviations; dashboard uses the same Lua helpers. `:Lazy` / `:LazyExtras` remain valid upstream names.
 
 ## Boot sequence
 
@@ -31,6 +31,7 @@ LazyVim's init loads `config.options`, then plugins, then `config.keymaps` and `
 lua/nvimgt/
 ├── config/          # vim.opt, keymaps, autocmds, lazy bootstrap ONLY
 ├── plugins/         # lazy.nvim specs (top-level .lua files only)
+├── utils/           # commands and other utilities
 ├── health.lua       # :checkhealth nvimgt
 └── types.lua        # LuaLS @meta (not runtime)
 
@@ -39,16 +40,15 @@ lua/plugins/extras/  # (optional) User extras discovered by :LazyExtras
 reference/lazyvim/   # Upstream snapshots — NOT loaded
 ```
 
-See [audit/05-folder-structure.md](./audit/05-folder-structure.md) for the full file-type matrix.
-
 ## What nvimGT owns
 
 | File | Role |
 |------|------|
-| `plugins/colorscheme.lua` | AstroDark + dashboard highlights |
 | `plugins/dashboard.lua` | Snacks startup screen |
-| `plugins/statusline.lua` | Lualine layout |
-| `plugins/tabline.lua` | Heirline buffer/tab bar |
+| `plugins/nvchad-ui.lua` | NvChad/ui statusline + tabufline (disables lualine/heirline/bufferline) |
+| `plugins/colorscheme.lua` | Disables astrotheme; loads base46 via chadrc |
+| `lua/chadrc.lua` | NvChad UI + base46 theme (astrodark default) |
+| `lua/themes/` | Custom base46 themes (`astrodark`, `astrolight`) |
 | `plugins/completion.lua` | blink.cmp documentation popup |
 | `plugins/gitsigns.lua` | Gutter icon overrides (NvChad salvage) |
 | `plugins/mason.lua` | Mason UI tweaks (NvChad salvage) |
@@ -61,4 +61,4 @@ Everything else (LSP, formatting, linting, default pickers) comes from the LazyV
 
 1. Run `:extras` inside nvimGT.
 2. Toggle language/tool packs — state saved to **`config.json`** (`vim.g.lazyvim_json` in `init.lua`).
-3. Reset to shipped defaults: `:NvimgtFresh` then restart.
+3. Reset to shipped defaults: `:reload` then restart.

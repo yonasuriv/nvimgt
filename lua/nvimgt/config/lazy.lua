@@ -14,6 +14,19 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local function load_base46_ui()
+  local cache = vim.g.base46_cache
+  if not cache then
+    return
+  end
+  for _, name in ipairs({ "defaults", "statusline" }) do
+    local path = cache .. name
+    if vim.fn.filereadable(path) == 1 then
+      dofile(path)
+    end
+  end
+end
+
 require("lazy").setup({
   spec = {
     -- Base plugin specs (LazyVim — see Credits; migrating toward nvimGT lazyload layer)
@@ -26,8 +39,7 @@ require("lazy").setup({
     version = false,
   },
   install = {
-    -- Prefer AstroDark on first install, fall back to LazyVim defaults
-    colorscheme = { "astrodark", "tokyonight", "habamax" },
+    colorscheme = { "habamax" },
   },
   checker = {
     enabled = true,
@@ -46,22 +58,16 @@ require("lazy").setup({
   },
 })
 
--- nvimGT command aliases — abbrevs call nvimgt.util.commands (see lua/nvimgt/util/commands.lua)
--- :die and :bye work without ! (same as :qa). Use :die! / :bye! to force quit.
-require("nvimgt.util.commands").setup_abbrevs()
+load_base46_ui()
+
+local commands = require("nvimgt.utils.commands")
+commands.setup_abbrevs()
+commands.setup_commands()
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
   once = true,
   callback = function()
-    vim.api.nvim_create_user_command("NvimgtFresh", function()
-      local path = vim.g.lazyvim_json or (vim.fn.stdpath("config") .. "/config.json")
-      local ok, err = os.remove(path)
-      if ok then
-        vim.notify("Removed " .. path .. " — restart Neovim to load shipped defaults.", vim.log.levels.INFO)
-      else
-        vim.notify("Could not remove " .. path .. (err and (": " .. err) or ""), vim.log.levels.ERROR)
-      end
-    end, { desc = "Delete config.json and restart to reset extras to shipped defaults" })
+    load_base46_ui()
   end,
 })

@@ -18,8 +18,10 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 
--- Clear search highlight on Escape
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear search highlight" })
+-- Smart Escape: close help/floats, close file (confirm), or clear search
+map("n", "<Esc>", function()
+  require("nvimgt.utils.escape").normal()
+end, { desc = "Close window/buffer or clear search" })
 
 -- Quick save and copy entire buffer
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })

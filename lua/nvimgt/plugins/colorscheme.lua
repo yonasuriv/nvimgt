@@ -1,29 +1,18 @@
--- nvimGT colorscheme: AstroNvim AstroDark + dashboard highlight overrides
-return {
-  {
-    "AstroNvim/astrotheme",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      highlights = {
-        global = {
-          -- Dashboard: white header, red icons/keys, grey descriptions, dimmed footer
-          SnacksDashboardHeader  = { fg = "#E0E0EE", bold = true },
-          SnacksDashboardIcon    = { fg = "#FF838B" },
-          SnacksDashboardDesc    = { fg = "#9B9FA9" },
-          SnacksDashboardKey     = { fg = "#FF838B" },
-          SnacksDashboardFooter  = { fg = "#595C66" },
-          SnacksDashboardSpecial = { fg = "#595C66" },
-        },
-      },
-    },
-  },
+-- nvimGT colorscheme: base46 via chadrc.lua (NvChad/base46)
+-- AstroDark removed — NvChad statusline/tabufline need base46 highlight cache.
 
-  -- Set nvimGT default colorscheme to AstroDark via the LazyVim opts merge
+return {
+  { "AstroNvim/astrotheme", enabled = false },
+
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "astrodark",
+      colorscheme = function()
+        local cache = vim.g.base46_cache
+        if cache and vim.fn.filereadable(cache .. "defaults") == 1 then
+          dofile(cache .. "defaults")
+        end
+      end,
     },
   },
 }

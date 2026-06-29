@@ -25,7 +25,7 @@ Vendored LazyVim copies. **Two `init.lua` files are loaded** and duplicate upstr
 | File | Should be |
 |------|-----------|
 | All `review/*` | `reference/lazyvim/plugins/` — not under rtp `plugins/` |
-| `lsp/keymaps.lua` | `nvimgt/util/lsp/keymaps.lua` if forked; else delete (upstream used at runtime) |
+| `lsp/keymaps.lua` | `nvimgt/utils/lsp/keymaps.lua` if forked; else delete (upstream used at runtime) |
 
 ## Conflict matrix
 

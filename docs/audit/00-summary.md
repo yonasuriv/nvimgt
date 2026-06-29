@@ -117,8 +117,8 @@ Only in unloaded `extras/coding/blink.lua` and `extras/editor/overseer.lua` (opt
 
 | Item | Issue | Recommendation |
 |------|-------|----------------|
-| `plugins.json` in README | File missing; gitignored | Document `lazyvim.json` instead |
-| `lazyvim.json` gitignored | Extras state not versioned | Track in repo OR document as local-only |
+| `plugins.json` | Never existed | Documented `config.json` instead |
+| `lazyvim.json` | Gitignored legacy name | nvimGT uses committed `config.json` via `vim.g.lazyvim_json` |
 | `docs/superpowers/` | Stale xlvim plan | Archive or delete |
 | README images | `.github/assets/` missing | Add assets or remove `<picture>` block |
 | Kickstart URL | Broken path | Fix to `github.com/nvim-lua/kickstart.nvim` |

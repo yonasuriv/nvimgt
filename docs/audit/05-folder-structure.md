@@ -20,7 +20,7 @@ lua/
     │   ├── dashboard.lua
     │   ├── statusline.lua
     │   └── tabline.lua
-    └── util/                   # (future) nvimGT runtime helpers if LazyVim is dropped
+    └── utils/                   # (future) nvimGT runtime helpers if LazyVim is dropped
 
 lua/plugins/extras/             # (optional) LazyVim "User extras" — discovered by :LazyExtras
     └── <category>/<name>.lua   # NOT under nvimgt/plugins/extras/
@@ -35,7 +35,7 @@ reference/                      # (optional) vendored upstream snapshots — NOT
 |--------|---------|---------|
 | `nvimgt/config/` | `vim.opt`, keymaps, autocmds, `lazy.setup` | Plugin `return { "author/plugin" }` specs, NvChad `dofile(base46_cache)`, utility modules |
 | `nvimgt/plugins/` | Top-level lazy specs only (auto-imported one level deep) | Library modules (`keymaps.lua` with `M.get()`), vendored trees with `init.lua` duplicates |
-| `nvimgt/util/` | `require`-able helpers (`nvimgt.util.*`) | Plugin specs |
+| `nvimgt/utils/` | `require`-able helpers (`nvimgt.util.*`) | Plugin specs |
 | `lua/plugins/extras/` | Optional extras toggled via `:LazyExtras` | Duplicates of LazyVim's built-in extras path |
 
 ---
@@ -50,7 +50,7 @@ reference/                      # (optional) vendored upstream snapshots — NOT
 | `autocmds.lua` | Personal autocommands (empty) | **Yes** | **Yes** | `config/autocmds.lua` | **KEEP** |
 | `mappings.lua` | Keymap definitions (side-effect script) | **No** | **Wrong name** | `config/keymaps.lua` | **MERGE** salvageable maps into `keymaps.lua`, then **DELETE** |
 | `cmp.lua` | nvim-cmp setup script (NvChad) | **No** | **Wrong folder** — plugin config | `plugins/cmp.lua` (lazy spec) or delete | **DELETE** — LazyVim uses blink.cmp |
-| `lspconfig.lua` | LSP utility module (`M.on_attach`, capabilities) | **No** | **Wrong folder** — util, not config | `nvimgt/lsp/on_attach.lua` or `util/lsp.lua` | **DELETE** — NvChad APIs; LazyVim owns LSP |
+| `lspconfig.lua` | LSP utility module (`M.on_attach`, capabilities) | **No** | **Wrong folder** — util, not config | `nvimgt/lsp/on_attach.lua` or `utils/lsp.lua` | **DELETE** — NvChad APIs; LazyVim owns LSP |
 | `luasnip.lua` | Snippet loader side-effects | **No** | **Wrong folder** — plugin config | `plugins/luasnip.lua` or inside blink extra | **DELETE** — LazyVim handles luasnip |
 | `gitsigns.lua` | Plugin opts table (no lazy wrapper) | **No** | **Wrong folder** — plugin spec body | `plugins/gitsigns.lua` | **DELETE** — NvChad base46; LazyVim configures gitsigns |
 | `mason.lua` | Plugin opts table | **No** | **Wrong folder** | `plugins/mason.lua` | **DELETE** |
@@ -108,7 +108,7 @@ These are the only plugin specs nvimGT intentionally owns today.
 | File | Actual type | lazy.nvim discovers? | Correct folder? | Recommended location | Action |
 |------|-------------|----------------------|-----------------|----------------------|--------|
 | `init.lua` | lazy.nvim plugin spec (LSP stack duplicate) | **Yes** (`nvimgt.plugins.lsp`) | **Redundant with LazyVim** | Delete or `reference/lazyvim/plugins/lsp/init.lua` | **DELETE from plugins/** |
-| `keymaps.lua` | Utility library (`M.get`, `M.set`) — **not** a plugin spec | **No** | **Wrong folder** — belongs in `util/` | `nvimgt/lsp/keymaps.lua` or upstream only | **DELETE** — duplicate of `lazyvim.plugins.lsp.keymaps`; `lsp/init.lua` requires upstream path anyway |
+| `keymaps.lua` | Utility library (`M.get`, `M.set`) — **not** a plugin spec | **No** | **Wrong folder** — belongs in `utils/` | `nvimgt/lsp/keymaps.lua` or upstream only | **DELETE** — duplicate of `lazyvim.plugins.lsp.keymaps`; `lsp/init.lua` requires upstream path anyway |
 
 **Anti-pattern:** Mixing a lazy spec (`init.lua`) with a library module (`keymaps.lua`) in the same folder implies both are plugin specs; only `init.lua` is imported.
 
@@ -120,7 +120,7 @@ These are the only plugin specs nvimGT intentionally owns today.
 |----------|------:|-------------|----------------------|-----------------|
 | `lang/` | 53 | lazy.nvim extra specs | **No** (no `extras/init.lua`, subdirs not scanned) | `lua/plugins/extras/lang/` for user extras **or** delete (use LazyVim upstream) |
 | `editor/` | 18 | lazy.nvim extra specs | **No** | same |
-| `util/` | 9 | lazy.nvim extra specs | **No** | same |
+| `utils/` | 9 | lazy.nvim extra specs | **No** | same |
 | `ui/` | 9 | lazy.nvim extra specs | **No** | same |
 | `ai/` | 9 | lazy.nvim extra specs | **No** | same |
 | `coding/` | 8 | lazy.nvim extra specs | **No** | same |
@@ -169,7 +169,7 @@ Is it loaded by init.lua preload or lazy import?
    ├─ Returns { import = "..." } for extras?
    │  └─ → lua/plugins/extras/...  (LazyVim user extras convention)
    ├─ Exposes require("nvimgt.*") helpers?
-   │  └─ → nvimgt/util/...
+   │  └─ → nvimgt/utils/...
    └─ :checkhealth or @meta only?
       └─ → nvimgt/health.lua or nvimgt/types.lua
 ```

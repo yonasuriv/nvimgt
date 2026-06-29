@@ -8,7 +8,7 @@ eXtended Line-editor Visual Improved Mode
 
 ## Description
 
-nvimGT is a fast, aesthetic Neovim configuration with a refined UI, strong defaults, and lazyload-first plugin management via [lazy.nvim](https://github.com/folke/lazy.nvim). It includes [LazyVim](https://github.com/LazyVim/LazyVim) support for LSP, extras, and core plugin specs.
+nvimGT is a fast, aesthetic Neovim **distribution** with its own UI (NvChad/ui, base46, Snacks dashboard) and lazyload-first plugin management via [lazy.nvim](https://github.com/folke/lazy.nvim). It **includes [LazyVim](https://github.com/LazyVim/LazyVim)** for LSP, Mason, and optional language/tool extras (`:extras`) — LazyVim is supported, not a fork to delete.
 
 ## Requirements
 
@@ -46,26 +46,38 @@ Custom nvimGT ASCII logo on startup (AstroDark palette). Startup line shows `X/Y
 
 ### Buffer / tab bar
 
-[heirline.nvim](https://github.com/rebelot/heirline.nvim) tabline with file icons, modified indicator, and close button. Bold **Explorer** label fills the offset above the sidebar.
+[NvChad/ui](https://github.com/NvChad/ui) **tabufline** — per-tab buffers, file icons, theme toggle, and explorer offset (Snacks / neo-tree). Configure in `lua/chadrc.lua`.
 
 ### Statusline
 
-[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) — mode, git, cwd, diagnostics, LSP, lazyload updates, git diff, progress, clock.
+[NvChad/ui](https://github.com/NvChad/ui) statusline (`default` theme). Theme and modules in `lua/chadrc.lua`; highlights from [base46](https://github.com/NvChad/base46).
 
 ### Colorscheme
 
-AstroDark via [astrotheme](https://github.com/AstroNvim/astrotheme). Dashboard highlights in `lua/nvimgt/plugins/colorscheme.lua`.
+**AstroDark** via custom base46 theme (`lua/themes/astrodark.lua`). Toggle light/dark with tabufline theme button or `:theme`. Dashboard palette in `chadrc.lua` `hl_override`.
 
 ### Completion
 
 [blink.cmp](https://github.com/saghen/blink.cmp) with auto-shown documentation.
 
+### Commands
+
+| Command | Action |
+|---------|--------|
+| `:cheatsheet` | NvChad keymap cheatsheet |
+| `:theme` | base46 theme picker (catppuccin excluded) |
+| `:extras` | LazyVim optional packs |
+| `:reload` | Reset shipped `config.json` extras state |
+
+### Extras & config state
+
+Shipped **`config.json`** at the config root stores LazyVim extras toggles (not `lazyvim.json` — path is set via `vim.g.lazyvim_json` in `init.lua`). To start fresh: `:reload`, restart, or delete `config.json`.
+
 ## Customizing
 
 - **Plugins** — add specs in `lua/nvimgt/plugins/`
 - **Keymaps** — `lua/nvimgt/config/keymaps.lua`
-- **Extras** — `:extras` (LazyVim packs; state in shipped `config.json`)
-- **Reset extras** — `:NvimgtFresh` then restart (or delete `config.json`)
+- **UI / themes** — `lua/chadrc.lua`, `lua/themes/`
 - **Guide** — [docs/spec/configuration.md](docs/spec/configuration.md)
 - **Architecture** — [docs/spec/architecture.md](docs/spec/architecture.md)
 - **Audit** — [docs/audit/00-summary.md](docs/audit/00-summary.md)

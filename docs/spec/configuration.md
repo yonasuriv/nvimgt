@@ -9,6 +9,9 @@ nvimGT builds on [lazy.nvim](https://github.com/folke/lazy.nvim) and imports [La
 | **lazy.nvim** | Plugin manager (`:lazy` or `:Lazy`) |
 | **lazyload** | Deferred loading (`lazy = true`, events, commands) — nvimGT docs use this word instead of "LazyVim lazy loading" |
 | **:extras** | Toggle optional language/tool packs (`:LazyExtras` also works) |
+| **:cheatsheet** | NvChad keymap cheatsheet |
+| **:theme** | base46 theme picker (no catppuccin) |
+| **config.json** | Shipped LazyVim extras state (`vim.g.lazyvim_json` in `init.lua`) |
 
 ## How plugin specs are loaded
 
@@ -72,8 +75,9 @@ Configured in `lua/nvimgt/plugins/dashboard.lua` (Snacks). Arrays like `preset.k
 
 ## Statusline & tabline
 
-- `statusline.lua` — lualine; use `Snacks.util.color("HlGroup")` inside `function()` for runtime colors.
-- `tabline.lua` — heirline; `ExplorerOffset` fills space above the sidebar with a bold **Explorer** label.
+- `nvchad-ui.lua` — [NvChad/ui](https://github.com/NvChad/ui) with `NvChad/base46` for highlights.
+- `chadrc.lua` — `M.ui.statusline` and `M.ui.tabufline` (see `:h nvui`).
+- `init.lua` sets `vim.g.base46_cache`; `config/lazy.lua` loads `defaults` + `statusline` cache after lazy setup.
 
 ## Keymaps
 
@@ -83,6 +87,6 @@ Personal bindings: `lua/nvimgt/config/keymaps.lua` (includes NvChad-adapted pick
 
 Run `:extras` (or `:LazyExtras`) — loads from **upstream LazyVim**. Enabled extras are stored in **`config.json`** at your config root (shipped with nvimGT).
 
-To reset extras to shipped defaults: run `:NvimgtFresh`, restart Neovim, or delete `config.json`.
+To reset extras to shipped defaults: run `:reload`, restart Neovim, or delete `config.json`.
 
 Custom extras you author: `lua/plugins/extras/<category>/<name>.lua`.

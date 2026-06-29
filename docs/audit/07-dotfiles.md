@@ -30,7 +30,7 @@
 | Purpose | LazyVim extras state (enabled language/tool packs) |
 | Path | Set in `init.lua` via `vim.g.lazyvim_json` — **not hardcoded** to `lazyvim.json` |
 | Shipped | Committed at repo root; synced to `~/.config/nvimgt/config.json` |
-| Reset | `:NvimgtFresh` then restart, or delete `config.json` manually |
+| Reset | `:reload` then restart, or delete `config.json` manually |
 
 ## No duplicates
 

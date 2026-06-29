@@ -8,6 +8,10 @@
 - [x] Salvage NvChad keymaps → `config/keymaps.lua`
 - [x] Salvage gitsigns/mason/treesitter opts → `plugins/*.lua`
 - [x] Delete orphan NvChad `config/` fragments
+- [x] NvChad/ui statusline + tabufline (`nvchad-ui.lua`, `chadrc.lua`, base46)
+- [x] Fix `nvimgt.utils.commands` module path
+- [x] AstroDark base46 theme (`lua/themes/astrodark.lua`) + dashboard palette
+- [x] `:cheatsheet` / `:theme` commands + dashboard keys; catppuccin excluded from picker
 
 ## Next — lazyload + nvimGT migration
 
@@ -25,5 +29,5 @@
 
 ## Observations
 
-- Catppuccin optional integrations existed only in reference extras; active theme is AstroDark.
+- Catppuccin optional integrations existed only in reference extras; active theme is base46 (`chadrc.lua`, default `onedark`).
 - `:LazyExtras` + upstream LazyVim is the correct extras workflow — no local `extras/` copy needed.

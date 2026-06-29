@@ -3,8 +3,12 @@
 
 local opt = vim.opt
 
--- Global statusline (single bar across all windows)
+-- Global statusline (NvChad stl uses vim.o.statusline; laststatus 3 = one bar)
 opt.laststatus = 3
 
--- Always show the top tabline so the nvimGT buffer/tab bar is visible
+-- tabufline sets showtabline; keep 2 so the bar is always visible
 opt.showtabline = 2
+
+-- Consistent line numbers (winbar gap previously broke the number column)
+opt.number = true
+opt.relativenumber = true

@@ -23,7 +23,7 @@ Open an issue with:
 
 **Keep it focused.** nvimGT is not a plugin distribution — it is a curated personal config. Plugins should have a clear, concrete benefit and not duplicate existing functionality. Prefer configuring what is already installed over adding new plugins.
 
-**No breaking changes to the core design.** The nvimGT UI layer (AstroDark + heirline tabline + lualine statusline + Snacks dashboard) is intentional. Changes that remove or replace these without discussion will not be accepted.
+**No breaking changes to the core design without discussion.** The nvimGT UI layer (base46 + NvChad/ui tabufline/statusline + Snacks dashboard) is intentional.
 
 **Respect the plugin loading model.** Use lazy.nvim's spec merge system (opts, keys, dependencies) rather than adding init scripts or patching third-party plugin files. See [docs/configuration.md](docs/configuration.md) for how the merge model works.
 
