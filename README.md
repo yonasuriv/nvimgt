@@ -1,74 +1,157 @@
-# XLVIM
+<div align="center" id="madewithlua">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/xlvim-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset=".github/assets/xlvim-white.png">
+    <img src=".github/assets/xlvim-dark.png" alt="XLVIM" width="110" height="100">
+  </picture>
+</div>
 
-```text
-          d8b            d8,
-          88P           `8P
-         d88
-?88,  88P888  ?88   d8P  88b  88bd8b,d88b
- `?8bd8P'?88  d88  d8P'  88P  88P'`?8P'?8b
- d8P?8b,  88b ?8b ,88'  d88  d88  d88  88P
-d8P' `?8b  88b`?888P'  d88' d88' d88'  88b
-```
+<h1 align="center">e<b>X</b>tended Line-editor with Visual Improved Mode</h1>
 
-**XLVIM** — *eXtended Line-editor Visual Improved Mode* — is a personal Neovim configuration that merges the best parts of three popular distros:
+<p align="center">
+  A Neovim configuration that fuses the best of
+  <a href="https://github.com/LazyVim/LazyVim">LazyVim</a>,
+  <a href="https://github.com/AstroNvim/AstroNvim">AstroNvim</a>, and
+  <a href="https://github.com/NvChad/NvChad">NvChad</a> into one cohesive setup.
+</p>
 
-- **[LazyVim](https://github.com/LazyVim/LazyVim)** as the solid plugin foundation
-- **[AstroNvim](https://github.com/AstroNvim/AstroNvim)**'s gorgeous **AstroDark** colors and top buffer/tab bar
-- **[NvChad](https://github.com/NvChad/NvChad)**'s clean, informative statusline
+---
 
-## Setup
+## What XLVIM Is
 
-### Test it
+XLVIM is a curated Neovim configuration built on [LazyVim](https://github.com/LazyVim/LazyVim) as its plugin foundation, extended with the visual identity and UX elements of AstroNvim and NvChad:
 
-```
-# This will clone it to a side-by-side config name, so you can test it without blowing away your current nvim config
+| Source | What XLVIM takes from it |
+|---|---|
+| **LazyVim** | Plugin manager, LSP/formatter/linter wiring, treesitter, all extras |
+| **AstroNvim** | AstroDark colorscheme, heirline-based buffer/tab bar |
+| **NvChad** | Statusline layout and section order |
+
+None of AstroNvim's or NvChad's core systems are installed — XLVIM only borrows their visual ideas, avoiding distribution conflicts.
+
+## Requirements
+
+- **Neovim** ≥ 0.10
+- **Git**
+- A [Nerd Font](https://www.nerdfonts.com/) — required for icons in the tabline, statusline, and dashboard
+- A terminal with [true color](https://github.com/termstandard/colors) support
+
+**Recommended:**
+
+| Tool | Purpose |
+|---|---|
+| `ripgrep` | Live grep in pickers |
+| `fd` | Faster file finding |
+| `gcc` or `clang` | Treesitter parser compilation |
+| `node` | Many LSP servers require it |
+| `lazygit` | In-editor Git UI (`<leader>gg`) |
+
+## Installation
+
+### Try it alongside your current config
+
+This clones XLVIM under a separate app name so your existing Neovim setup is untouched:
+
+```bash
 git clone https://github.com/yonasuriv/xlvim ~/.config/xlvim
 NVIM_APPNAME=xlvim nvim
 ```
 
-### Install it
+lazy.nvim bootstraps itself on the first launch and installs everything automatically.
 
-When you are ready to make it your main config:
+### Make it your default config
 
 ```bash
-# Backup your existing Neovim config (optional)
+# Optional: back up your existing config
 mv ~/.config/nvim ~/.config/nvim.bak
 
-# Clone XLVIM
+# Clone XLVIM as the default
 git clone https://github.com/yonasuriv/xlvim ~/.config/nvim
-
-# Start Neovim
-# The first launch will boostrap lazy.nvim and install everything automatically
 nvim
 ```
 
-## What's inside
+## Features
 
-| Feature | Implementation | Inspired by |
-|---|---|---|
-| Plugin manager | `lazy.nvim` + LazyVim distribution | LazyVim |
-| Colorscheme | `AstroNvim/astrotheme` → `astrodark` | AstroNvim |
-| Bottom statusline | `lualine.nvim` with NvChad-style sections | NvChad |
-| Top buffer/tab bar | `heirline.nvim` custom tabline | AstroNvim |
+### Dashboard
 
-## File layout
+Custom XLVIM ASCII-art logo on startup, styled with the AstroDark palette — near-white header, red icons, grey menu text, and a dimmed plugin-count footer. The startup line shows `X/Y plugins loaded in XX.ZZ ms` without distracting icons.
 
-```text
-lua/
-├── config/
-│   ├── lazy.lua      # lazy.nvim bootstrap + spec imports
-│   ├── options.lua   # XLVIM options
-│   ├── keymaps.lua   # your keymaps
-│   └── autocmds.lua  # your autocommands
-└── plugins/
-    ├── colorscheme.lua  # AstroDark
-    ├── statusline.lua   # NvChad-style lualine
-    └── tabline.lua      # AstroNvim-style heirline tabline
+### Buffer / Tab Bar
+
+Built with [`heirline.nvim`](https://github.com/rebelot/heirline.nvim). Each buffer tab shows a filetype icon, the filename, a modified indicator (●), and a red close button. Tab-page numbers appear on the right when more than one Vim tab is open. When the file-explorer sidebar is open, a bold **Explorer** label fills the offset above it.
+
+### Statusline
+
+Built with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim), themed to AstroDark. Sections left → right:
+
+| Section | Contents |
+|---|---|
+| Left | Mode pill · Git branch · Working directory |
+| Center | Filetype icon · File path · Diagnostics |
+| Right | LSP progress · LSP clients · Lazy updates · Git diff |
+| Far right | Cursor position · Clock (HH:MM) |
+
+### Colorscheme
+
+AstroDark via [`AstroNvim/astrotheme`](https://github.com/AstroNvim/astrotheme). Highlight overrides — including all dashboard colors — live in `lua/plugins/colorscheme.lua` under `highlights.global`, so they apply on top of the theme without patching it.
+
+### Completion
+
+[`blink.cmp`](https://github.com/saghen/blink.cmp) with documentation auto-shown after a short delay.
+
+## File Layout
+
+```
+xlvim/
+├── init.lua                    # Neovim entry point
+├── lazyvim.json                # LazyVim plugin selection lock
+├── scripts/
+│   └── sync-xlvim-config.sh   # Dev helper: sync working dir → ~/.config/xlvim
+└── lua/
+    ├── config/
+    │   ├── lazy.lua            # lazy.nvim bootstrap + plugin spec imports
+    │   ├── options.lua         # Neovim option overrides (tabline, statusline)
+    │   ├── keymaps.lua         # Personal keymaps
+    │   └── autocmds.lua        # Personal autocommands
+    └── plugins/
+        ├── colorscheme.lua     # AstroDark theme + highlight overrides
+        ├── dashboard.lua       # Snacks dashboard (logo, menu items, startup line)
+        ├── statusline.lua      # Lualine statusline configuration
+        ├── tabline.lua         # Heirline buffer/tab bar
+        └── completion.lua      # Blink.cmp completion settings
 ```
 
 ## Customizing
 
-Drop your own plugin specs in `lua/plugins/`. They will be picked up automatically by `lazy.nvim`. Override LazyVim defaults the same way — any spec for an existing plugin will be merged.
+The short version:
+
+- **Add a plugin** — drop a `.lua` spec in `lua/plugins/`. lazy.nvim picks it up automatically.
+- **Override a plugin** — use the same plugin name in a new file; lazy.nvim deep-merges the opts.
+- **Keymaps** — add to `lua/config/keymaps.lua`.
+- **Autocommands** — add to `lua/config/autocmds.lua`.
+- **LazyVim extras** — run `:LazyExtras` to browse and enable language/tool support packs.
+
+See **[docs/configuration.md](docs/configuration.md)** for a full walkthrough.
+
+## Development Workflow
+
+When iterating on the config from a working directory (e.g., `~/Desktop/xlvim`) while testing via `NVIM_APPNAME=xlvim nvim`, use the sync script to keep the deployed copy up to date:
+
+```bash
+# One-time copy
+bash scripts/sync-xlvim-config.sh
+
+# Watch for changes and re-copy automatically
+bash scripts/sync-xlvim-config.sh --watch
+```
+
+See **[docs/development.md](docs/development.md)** for the full dev workflow.
+
+## Credits
+
+- [LazyVim](https://github.com/LazyVim/LazyVim) by [@folke](https://github.com/folke) — plugin foundation and best-in-class defaults
+- [AstroNvim](https://github.com/AstroNvim/AstroNvim) — AstroDark colorscheme and tabline design language
+- [NvChad](https://github.com/NvChad/NvChad) — statusline layout inspiration
 
 ## License
 

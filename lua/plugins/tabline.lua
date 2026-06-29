@@ -5,21 +5,48 @@ return {
 
   {
     "rebelot/heirline.nvim",
-    event = "VeryLazy",
+    lazy = false,
+    priority = 200,
     dependencies = { "nvim-mini/mini.icons" },
     opts = function()
       local utils = require("heirline.utils")
+
+      -- Fills space above the left sidebar and shows bold "Explorer" label
+      local ExplorerOffset = {
+        condition = function(self)
+          for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.api.nvim_win_get_position(win)[2] == 0 then
+              local ft = vim.bo[vim.api.nvim_win_get_buf(win)].filetype
+              if vim.tbl_contains({ "snacks_layout_box", "neo-tree", "NvimTree" }, ft) then
+                self.offset_win = win
+                return true
+              end
+            end
+          end
+          return false
+        end,
+        provider = function(self)
+          local width = vim.api.nvim_win_get_width(self.offset_win)
+          local title = "Explorer"
+          local pad = math.floor((width - vim.fn.strwidth(title)) / 2)
+          return string.rep(" ", pad) .. title .. string.rep(" ", width - vim.fn.strwidth(title) - pad)
+        end,
+        hl = function()
+          local fill = utils.get_highlight("TabLineFill")
+          return { fg = fill.fg, bg = fill.bg, bold = true }
+        end,
+      }
 
       -- Clickable buffer tab: file icon, name, modified indicator, close button
       local BufferTab = {
         init = function(self)
           self.filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.bufnr), ":t")
           if self.filename == "" then
-            self.filename = "[No Name]"
+            self.filename = "Untitled"
           end
           self.is_modified = vim.bo[self.bufnr].modified
           local icon, hl = require("mini.icons").get("file", self.filename)
-          self.icon = icon or ""
+          self.icon = icon or ""
           self.icon_hl = hl or "MiniIconsGrey"
         end,
         {
@@ -27,7 +54,7 @@ return {
             return " " .. self.icon .. " "
           end,
           hl = function(self)
-            return self.is_active and { fg = self.icon_hl } or "TabLine"
+            return self.is_active and self.icon_hl or "TabLine"
           end,
         },
         {
@@ -47,9 +74,13 @@ return {
           end,
         },
         {
-          provider = "󰅖",
+          provider = "󰅖 ",
           hl = function(self)
-            return self.is_active and "TabLineSel" or "TabLine"
+            if self.is_active then
+              local c = utils.get_highlight("DiagnosticError")
+              return { fg = c.fg and string.format("#%06x", c.fg) or "#FF5555" }
+            end
+            return "TabLine"
           end,
           on_click = {
             callback = function(_, minwid, _, button)
@@ -91,15 +122,13 @@ return {
 
       return {
         tabline = {
-          -- Buffer list with overflow markers
+          ExplorerOffset,
           utils.make_buflist(
             BufferTab,
-            { provider = "﬌", hl = "TabLineFill" },
-            { provider = "﬍", hl = "TabLineFill" }
+            { provider = " < ", hl = "TabLineFill" },
+            { provider = " > ", hl = "TabLineFill" }
           ),
-          -- Fill the remaining space
           { provider = "%=", hl = "TabLineFill" },
-          -- Tab-page numbers, only shown when more than one tab exists
           {
             condition = function()
               return #vim.api.nvim_list_tabpages() > 1
