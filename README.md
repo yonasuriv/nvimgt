@@ -171,7 +171,7 @@ The short version:
 - **Plugins** — add specs in `lua/nvimgt/plugins/`. lazy.nvim picks it up automatically.
   - **Override a plugin** — use the same plugin name in a new file; lazy.nvim deep-merges the opts.
 - **Keymaps** —  add to `lua/nvimgt/config/keymaps.lua`
-- **Autocommands** — add to `lua/config/autocmds.lua`.
+- **Autocommands** — add to `lua/nvimgt/config/autocmds.lua`.
 - **UI / themes** — add to `lua/themes/`, main config in `lua/nvimgt/config/theme.lua`
 - **Extras** — run `:extras` to browse and enable lazyvim extras and language/tool support packs.
 
@@ -196,24 +196,40 @@ NVIM_APPNAME=nvimgt nvim # or nvimgt if you've set up the alias
 ## File Layout
 
 ```
-nvimgt/
+nvimGT/
 ├── init.lua                    # Neovim entry point
-├── config.json                 # Plugin selection lock
+├── config.json                 # LazyVim extras state (:extras; reset with :reload)
 ├── scripts/
 │   ├── install.sh              # curl | bash installer
 │   └── sync.sh                 # Dev helper: sync working dir → ~/.config/nvimgt
+├── docs/
+│   └── spec/                   # architecture, configuration, development
 └── lua/
-    ├── config/
-    │   ├── lazy.lua            # lazy.nvim bootstrap + plugin spec imports
-    │   ├── options.lua         # Neovim option overrides (tabline, statusline)
-    │   ├── keymaps.lua         # Personal keymaps
-    │   └── autocmds.lua        # Personal autocommands
-    └── plugins/
-        ├── colorscheme.lua     # AstroDark theme + highlight overrides
-        ├── dashboard.lua       # Snacks dashboard (logo, menu items, startup line)
-        ├── statusline.lua      # Lualine statusline configuration
-        ├── tabline.lua         # Heirline buffer/tab bar
-        └── completion.lua      # Blink.cmp completion settings
+    ├── themes/                 # Custom base46 themes
+    │   ├── astrodark.lua
+    │   └── astrolight.lua
+    └── nvimgt/
+        ├── config/
+        │   ├── lazy.lua        # lazy.nvim bootstrap + plugin spec imports
+        │   ├── theme.lua       # UI theme config
+        │   ├── options.lua     # vim.opt overrides
+        │   ├── keymaps.lua     # Personal keymaps
+        │   └── autocmds.lua    # Personal autocommands
+        ├── plugins/            # lazy.nvim specs (each file auto-imported)
+        │   ├── ui.lua          # statusline + tabufline
+        │   ├── colorscheme.lua # base46 colorscheme loader
+        │   ├── dashboard.lua   # Snacks dashboard
+        │   ├── completion.lua  # blink.cmp settings
+        │   ├── lazyvim.lua     # LazyVim defaults tweaks
+        │   ├── gitsigns.lua    # Gutter icon overrides
+        │   ├── mason.lua       # Mason UI tweaks
+        │   └── treesitter.lua  # Core grammar ensure_installed
+        └── utils/
+            ├── commands.lua    # :theme, :lazy, :reload, explorer, etc.
+            ├── tabufline.lua   # Tabufline modules (buffers, workspaces)
+            ├── themes.lua      # Theme picker wrapper
+            ├── escape.lua      # Smart Esc behavior
+            └── cheatsheet/     # Fullscreen keymap cheatsheet
 ```
 
 ## Documentation

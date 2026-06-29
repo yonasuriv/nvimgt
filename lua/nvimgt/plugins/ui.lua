@@ -1,11 +1,9 @@
--- nvimGT: NvChad UI — statusline (stl) + tabufline; replaces lualine/heirline
+-- nvimGT UI — statusline (stl) + tabufline; replaces lualine/heirline
 return {
   { "nvim-lualine/lualine.nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = false },
   { "rebelot/heirline.nvim", enabled = false },
-
   { "nvim-tree/nvim-web-devicons", lazy = true },
-
   {
     "NvChad/base46",
     lazy = false,
@@ -14,7 +12,6 @@ return {
       require("base46").load_all_highlights()
     end,
   },
-
   {
     "NvChad/ui",
     lazy = false,
@@ -26,6 +23,14 @@ return {
       "nvzone/volt",
     },
     config = function()
+      -- NvChad persists theme/transparency edits via replace_word (default: chadrc.lua)
+      local nvutils = require("nvchad.utils")
+      local theme_path = vim.fn.stdpath("config") .. "/lua/nvimgt/config/theme.lua"
+      local replace_word = nvutils.replace_word
+      nvutils.replace_word = function(old, new, filepath)
+        return replace_word(old, new, filepath or theme_path)
+      end
+
       require("nvchad")
       require("nvimgt.utils.tabufline").setup()
 

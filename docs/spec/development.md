@@ -44,21 +44,19 @@ NVIM_APPNAME=nvimgt nvim --headless -c "qa" 2>&1   # no output = clean start
 ```
 nvimgt/
 ├── init.lua
-├── config.json                 # Shipped extras state (LazyVim; reset with :reload)
+├── config.json              # Shipped extras state (LazyVim; reset with :reload)
 ├── .stylua.toml
-├── reference/lazyvim/       # upstream snapshots (not loaded)
 ├── scripts/
 │   ├── install.sh
 │   └── sync.sh
 ├── docs/
 │   ├── architecture.md
 │   ├── configuration.md
-│   ├── development.md
-│   └── audit/               # repo audits
+│   └── development.md
 └── lua/nvimgt/
     ├── config/
-    │   ├── lazy.lua         # lazy.nvim bootstrap
-    │   ├── theme.lua        # NvChad UI + base46 theme
+    │   ├── lazy.lua 
+    │   ├── theme.lua
     │   ├── options.lua
     │   ├── keymaps.lua
     │   └── autocmds.lua

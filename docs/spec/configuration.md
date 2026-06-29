@@ -26,7 +26,7 @@ require("lazy").setup({
 })
 ```
 
-Every top-level `.lua` file in `lua/nvimgt/plugins/` is imported automatically. Subdirectories are **not** scanned unless they contain an `init.lua` — keep vendored copies out of this folder (see `reference/lazyvim/`).
+Every top-level `.lua` file in `lua/nvimgt/plugins/` is imported automatically. Subdirectories are **not** scanned unless they contain an `init.lua`.
 
 Merge rules (lazy.nvim):
 
@@ -75,7 +75,7 @@ Configured in `lua/nvimgt/plugins/dashboard.lua` (Snacks). Arrays like `preset.k
 
 ## Statusline & tabline
 
-- `nvchad-ui.lua` — [NvChad/ui](https://github.com/NvChad/ui) with `NvChad/base46` for highlights.
+- `ui.lua` — [NvChad/ui](https://github.com/NvChad/ui) with `NvChad/base46` for highlights.
 - `lua/nvimgt/config/theme.lua` — `M.ui.statusline`, `M.ui.tabufline`, and base46 theme (see `:h nvui`).
 - `init.lua` sets `vim.g.base46_cache` and preloads `chadrc` → `nvimgt.config.theme` for NvChad/ui; `config/lazy.lua` loads `defaults` + `statusline` cache after lazy setup.
 

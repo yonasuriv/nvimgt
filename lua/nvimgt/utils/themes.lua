@@ -5,7 +5,6 @@ local api = vim.api
 
 local EXCLUDED = { catppuccin = true }
 
-local backdrop_win = nil
 local cleanup_augroup = nil
 
 local function filtered_themes()
@@ -21,34 +20,8 @@ local function cancel_cmp()
   end)
 end
 
-local function close_backdrop()
-  if backdrop_win and api.nvim_win_is_valid(backdrop_win) then
-    api.nvim_win_close(backdrop_win, true)
-  end
-  backdrop_win = nil
-end
-
-local function open_backdrop()
-  close_backdrop()
-  api.nvim_set_hl(0, "NvimgtOverlay", { bg = "#000000", fg = "#000000" })
-  local buf = api.nvim_create_buf(false, true)
-  backdrop_win = api.nvim_open_win(buf, false, {
-    relative = "editor",
-    width = vim.o.columns,
-    height = vim.o.lines,
-    row = 0,
-    col = 0,
-    style = "minimal",
-    focusable = false,
-    zindex = 1,
-  })
-  vim.wo[backdrop_win].winhl = "Normal:NvimgtOverlay"
-  api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
-end
-
-local function cleanup()
+local function cleanup_au()
   cancel_cmp()
-  close_backdrop()
   vim.cmd.stopinsert()
   if cleanup_augroup then
     pcall(api.nvim_del_augroup_by_id, cleanup_augroup)
@@ -56,19 +29,93 @@ local function cleanup()
   end
 end
 
+local function theme_state()
+  return package.loaded["nvchad.themes.state"] and require("nvchad.themes.state") or nil
+end
+
+--- Close picker floats; revert theme unless confirmed
+local function close_picker()
+  local state = theme_state()
+  local confirmed = state and state.confirmed
+
+  cancel_cmp()
+  vim.cmd.stopinsert()
+
+  if state then
+    for _, win in ipairs({ state.input_win, state.win }) do
+      if win and api.nvim_win_is_valid(win) then
+        pcall(api.nvim_win_close, win, true)
+      end
+    end
+    for _, buf in ipairs({ state.input_buf, state.buf }) do
+      if buf and api.nvim_buf_is_valid(buf) then
+        pcall(api.nvim_buf_delete, buf, { force = true })
+      end
+    end
+  end
+
+  if state and not confirmed then
+    pcall(function()
+      require("plenary.reload").reload_module("chadrc")
+      local theme = require("chadrc").base46.theme
+      require("nvchad.themes.utils").reload_theme(theme)
+    end)
+  end
+
+  package.loaded["nvchad.themes.state"] = nil
+  pcall(function()
+    require("plenary.reload").reload_module("nvchad.themes")
+  end)
+
+  cleanup_au()
+end
+
+local function confirm_theme()
+  local state = theme_state()
+  if not state or #state.themes_shown == 0 then
+    return
+  end
+
+  state.confirmed = true
+  local name = state.themes_shown[state.index]
+  package.loaded.chadrc = nil
+  local old_theme = require("chadrc").base46.theme
+
+  require("nvchad.utils").replace_word('"' .. old_theme .. '"', '"' .. name .. '"')
+  close_picker()
+end
+
+local function cancel_picker()
+  local state = theme_state()
+  if state then
+    state.confirmed = false
+  end
+  close_picker()
+end
+
+--- volt.close() feeds "q" in insert mode; close mapping is normal-mode only
 local function hook_volt_close()
   local volt_utils = require("volt.utils")
-  local orig = volt_utils.close
+  if volt_utils._nvimgt_hooked then
+    return
+  end
+  volt_utils._nvimgt_hooked = true
+
+  local orig_close = volt_utils.close
   volt_utils.close = function(val)
-    cleanup()
-    volt_utils.close = orig
-    return orig(val)
+    local state = theme_state()
+    if state and state.input_win and api.nvim_win_is_valid(state.input_win) then
+      pcall(api.nvim_win_close, state.input_win, true)
+    end
+    orig_close(val)
+    volt_utils.close = orig_close
+    volt_utils._nvimgt_hooked = nil
+    cleanup_au()
   end
 end
 
 function M.open()
   cancel_cmp()
-  open_backdrop()
   hook_volt_close()
 
   cleanup_augroup = api.nvim_create_augroup("NvimgtThemePicker", { clear = true })
@@ -76,13 +123,13 @@ function M.open()
     group = cleanup_augroup,
     callback = function(ev)
       if ev.event == "WinClosed" then
-        local state = package.loaded["nvchad.themes.state"] and require("nvchad.themes.state")
+        local state = theme_state()
         if state and (ev.match == state.input_win or ev.match == state.win) then
-          vim.schedule(cleanup)
+          vim.schedule(cleanup_au)
         end
         return
       end
-      cleanup()
+      cleanup_au()
     end,
   })
 
@@ -90,6 +137,7 @@ function M.open()
   local state = require("nvchad.themes.state")
   state.val = filtered_themes()
   state.themes_shown = state.val
+  state.confirmed = false
 
   require("nvchad.themes").open({
     border = false,
@@ -98,6 +146,10 @@ function M.open()
         buffer = input_buf,
         callback = cancel_cmp,
       })
+
+      -- NvChad maps <CR> then volt.close() which fails in insert mode; override last
+      vim.keymap.set({ "i", "n" }, "<CR>", confirm_theme, { buffer = input_buf, nowait = true })
+      vim.keymap.set("i", "<Esc>", cancel_picker, { buffer = input_buf, nowait = true })
     end,
   })
 end

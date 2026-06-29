@@ -8,7 +8,7 @@
 - [x] Salvage NvChad keymaps → `config/keymaps.lua`
 - [x] Salvage gitsigns/mason/treesitter opts → `plugins/*.lua`
 - [x] Delete orphan NvChad `config/` fragments
-- [x] NvChad/ui statusline + tabufline (`nvchad-ui.lua`, `config/theme.lua`, base46)
+- [x] NvChad/ui statusline + tabufline (`ui.lua`, `config/theme.lua`, base46)
 - [x] Fix `nvimgt.utils.commands` module path
 - [x] AstroDark base46 theme (`lua/themes/astrodark.lua`) + dashboard palette
 - [x] `:cheatsheet` / `:theme` commands + dashboard keys; catppuccin excluded from picker

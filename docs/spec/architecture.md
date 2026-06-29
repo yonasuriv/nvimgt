@@ -36,8 +36,6 @@ lua/nvimgt/
 └── types.lua        # LuaLS @meta (not runtime)
 
 lua/plugins/extras/  # (optional) User extras discovered by :LazyExtras
-
-reference/lazyvim/   # Upstream snapshots — NOT loaded
 ```
 
 ## What nvimGT owns
@@ -45,15 +43,15 @@ reference/lazyvim/   # Upstream snapshots — NOT loaded
 | File | Role |
 |------|------|
 | `plugins/dashboard.lua` | Snacks startup screen |
-| `plugins/nvchad-ui.lua` | NvChad/ui statusline + tabufline (disables lualine/heirline/bufferline) |
+| `plugins/ui.lua` | NvChad/ui statusline + tabufline (disables lualine/heirline/bufferline) |
 | `plugins/colorscheme.lua` | Disables astrotheme; loads base46 via `config/theme.lua` |
-| `config/theme.lua` | NvChad UI + base46 theme (astrodark default) |
-| `lua/themes/` | Custom base46 themes (`astrodark`, `astrolight`) |
 | `plugins/completion.lua` | blink.cmp documentation popup |
 | `plugins/gitsigns.lua` | Gutter icon overrides (NvChad salvage) |
 | `plugins/mason.lua` | Mason UI tweaks (NvChad salvage) |
 | `plugins/treesitter.lua` | Core grammar ensure_installed |
 | `config/keymaps.lua` | Personal + NvChad-adapted bindings |
+| `config/theme.lua` | NvChad UI + base46 theme (astrodark default) |
+| `lua/themes/` | Custom base46 themes (`astrodark`, `astrolight`) |
 
 Everything else (LSP, formatting, linting, default pickers) comes from the LazyVim import until the lazyload migration replaces it.
 

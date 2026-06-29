@@ -6,6 +6,7 @@ local M = {}
 
 M.base46 = {
   theme = "astrodark",
+  transparency = true,
   theme_toggle = { "astrodark", "astrolight" },
   -- LazyVim uses blink + snacks; skip NvChad highlight packs we do not ship
   excluded = { "cmp", "telescope" },
