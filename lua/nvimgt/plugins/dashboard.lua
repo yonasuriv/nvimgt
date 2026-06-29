@@ -20,14 +20,14 @@ return {
             
             { icon = " ", key = "n", desc = "New File",        action = ":ene | startinsert" },
             { icon = " ", key = "r", desc = "Recent Files",    action = ":lua Snacks.dashboard.pick('oldfiles')" },
-            { icon = " ", key = "f", desc = "Find File",       action = ":lua Snacks.dashboard.pick('files')" },
-            { icon = " ", key = "g", desc = "Find Text",       action = ":lua Snacks.dashboard.pick('live_grep')" },
+            -- { icon = " ", key = "f", desc = "Find File",       action = ":lua Snacks.dashboard.pick('files')" },
+            -- { icon = " ", key = "g", desc = "Find Text",       action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = " ", key = "h", desc = "Cheatsheet",      action = ":lua require('nvimgt.utils.commands').cheatsheet()" },
             { icon = "󱓻 ", key = "t", desc = "Themes",          action = ":lua require('nvimgt.utils.commands').theme()" },
             { icon = "󰒲 ", key = "l", desc = "Lazy",            action = ":lua require('nvimgt.utils.commands').lazy()" },
             { icon = " ", key = "c", desc = "Config",          action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
             { icon = " ", key = "x", desc = "Extras",          action = ":lua require('nvimgt.utils.commands').extras()" },
-            { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+            -- { icon = " ", key = "s", desc = "Restore Session", section = "session" },
             { icon = " ", key = "q", desc = "Quit",            action = ":lua require('nvimgt.utils.commands').die()" },
           },
         },
@@ -51,11 +51,49 @@ return {
         -- Large scrolloff centers content and prevents any visual scrollbar
         wo = { scrolloff = 999 },
       },
-      -- Remove "Explorer" title from the sidebar panel -- the tabline offset already shows it
+      -- Explorer + picker UX (no multi-select column, subtle cursor row)
       picker = {
+        formatters = {
+          selected = {
+            show_always = false,
+            unselected = false,
+          },
+        },
+        win = {
+          list = {
+            wo = {
+              concealcursor = "",
+            },
+            keys = {
+              ["<Tab>"] = false,
+              ["<S-Tab>"] = false,
+              ["<c-a>"] = false,
+            },
+          },
+        },
         sources = {
           explorer = {
             title = "",
+            win = {
+              list = {
+                keys = {
+                  ["<Tab>"] = false,
+                  ["<S-Tab>"] = false,
+                  ["<c-a>"] = false,
+                },
+              },
+            },
+          },
+          select = {
+            win = {
+              list = {
+                keys = {
+                  ["<Tab>"] = false,
+                  ["<S-Tab>"] = false,
+                  ["<c-a>"] = false,
+                },
+              },
+            },
           },
         },
       },

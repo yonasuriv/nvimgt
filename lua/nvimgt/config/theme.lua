@@ -1,4 +1,4 @@
--- nvimGT NvChad UI config (merged into nvconfig by NvChad/ui)
+-- nvimGT theme config
 -- See :h nvui and https://github.com/NvChad/ui/blob/main/lua/nvconfig.lua
 
 ---@type ChadrcConfig
@@ -17,6 +17,8 @@ M.base46 = {
     SnacksDashboardKey = { fg = "#FF838B" },
     SnacksDashboardFooter = { fg = "#595C66" },
     SnacksDashboardSpecial = { fg = "#595C66" },
+    -- Snacks picker: underline cursor row instead of solid block (mouse + keyboard)
+    SnacksPickerListCursorLine = { bg = "NONE", underline = true },
   },
 }
 

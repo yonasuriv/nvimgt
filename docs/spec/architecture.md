@@ -46,8 +46,8 @@ reference/lazyvim/   # Upstream snapshots — NOT loaded
 |------|------|
 | `plugins/dashboard.lua` | Snacks startup screen |
 | `plugins/nvchad-ui.lua` | NvChad/ui statusline + tabufline (disables lualine/heirline/bufferline) |
-| `plugins/colorscheme.lua` | Disables astrotheme; loads base46 via chadrc |
-| `lua/chadrc.lua` | NvChad UI + base46 theme (astrodark default) |
+| `plugins/colorscheme.lua` | Disables astrotheme; loads base46 via `config/theme.lua` |
+| `config/theme.lua` | NvChad UI + base46 theme (astrodark default) |
 | `lua/themes/` | Custom base46 themes (`astrodark`, `astrolight`) |
 | `plugins/completion.lua` | blink.cmp documentation popup |
 | `plugins/gitsigns.lua` | Gutter icon overrides (NvChad salvage) |

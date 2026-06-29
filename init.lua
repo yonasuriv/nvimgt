@@ -13,4 +13,9 @@ for _, name in ipairs({ "options", "keymaps", "autocmds" }) do
   end
 end
 
+-- NvChad/ui expects require("chadrc"); nvimGT config lives at nvimgt.config.theme
+package.preload["chadrc"] = function()
+  return require("nvimgt.config.theme")
+end
+
 require("nvimgt.config.lazy")

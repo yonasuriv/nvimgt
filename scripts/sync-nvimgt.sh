@@ -16,7 +16,7 @@ do_sync() {
     --exclude '*.swp' \
     --exclude '*~' \
     "$SRC/" "$DST/"
-  echo "[nvimgt] synced at $(date '+%H:%M:%S')"
+  printf "\n\033[1;37mnvim\033[0m \033[1;31mGT\033[0m synced at $(date '+%H:%M:%S')."
 }
 
 case "${1:-}" in

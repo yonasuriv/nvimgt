@@ -68,11 +68,19 @@ end, { desc = "Find all files" })
 
 -- File explorer (Snacks explorer instead of NvChad nvim-tree)
 map("n", "<C-n>", function()
-  Snacks.explorer.open()
-end, { desc = "Toggle explorer" })
+  require("nvimgt.utils.commands").explorer()
+end, { desc = "Open explorer" })
 map("n", "<leader>e", function()
-  Snacks.explorer.open()
-end, { desc = "Focus explorer" })
+  require("nvimgt.utils.commands").explorer()
+end, { desc = "Open explorer" })
+map("n", "<leader>fe", function()
+  require("nvimgt.utils.commands").explorer()
+end, { desc = "Open explorer (root dir)" })
+
+-- nvimGT shortcuts (dashboard keys h/t/l match actions shown on startup screen)
+map("n", "t", function()
+  require("nvimgt.utils.commands").theme()
+end, { desc = "Theme picker" })
 
 -- Terminal: leave terminal mode with Ctrl+x
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Exit terminal mode" })

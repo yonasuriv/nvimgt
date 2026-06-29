@@ -27,7 +27,7 @@ end
 --- Close help, floats, snacks panels, NvChad overlays, etc.
 function M.close_aux()
   if vim.g.nvcheatsheet_displayed then
-    vim.cmd("bw")
+    require("nvimgt.utils.cheatsheet").close()
     return true
   end
 

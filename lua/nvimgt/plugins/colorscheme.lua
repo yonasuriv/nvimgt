@@ -1,4 +1,4 @@
--- nvimGT colorscheme: base46 via chadrc.lua (NvChad/base46)
+-- nvimGT colorscheme: base46 via lua/nvimgt/config/theme.lua (NvChad/base46)
 -- AstroDark removed — NvChad statusline/tabufline need base46 highlight cache.
 
 return {

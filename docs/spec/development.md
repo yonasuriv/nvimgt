@@ -32,6 +32,8 @@ NVIM_APPNAME=nvimgt nvim --headless -c "qa" 2>&1   # no output = clean start
 | `:extras` / `:LazyExtras` | Toggle upstream LazyVim extras |
 | `:die` / `:bye` / `:qa` | Quit (`:die!` / `:bye!` = `:qa!`) |
 | `:reload` | Delete `config.json` to reset extras (restart after) |
+| `t` | Theme picker (normal mode) |
+| `<leader>e` / `<C-n>` | Open file explorer |
 | `:checkhealth nvimgt` | nvimGT health checks |
 | `:LspInfo` | Active LSP clients |
 
@@ -54,6 +56,7 @@ nvimgt/
 └── lua/nvimgt/
     ├── config/
     │   ├── lazy.lua         # lazy.nvim bootstrap
+    │   ├── theme.lua        # NvChad UI + base46 theme
     │   ├── options.lua
     │   ├── keymaps.lua
     │   └── autocmds.lua

@@ -16,18 +16,29 @@ function M.extras()
   vim.cmd("LazyExtras")
 end
 
---- NvChad keymap cheatsheet (alias for :NvCheatsheet)
+--- NvChad keymap cheatsheet (fullscreen float + fixed grid layout)
 function M.cheatsheet()
-  if vim.fn.exists(":NvCheatsheet") ~= 2 then
-    vim.notify("NvCheatsheet not available yet — wait for startup to finish.", vim.log.levels.WARN)
-    return
-  end
-  vim.cmd("NvCheatsheet")
+  require("nvimgt.utils.cheatsheet").toggle()
 end
 
 --- NvChad theme picker without catppuccin variants
 function M.theme()
   require("nvimgt.utils.themes").open()
+end
+
+--- Open Snacks file explorer (reopens sidebar after it was closed)
+function M.explorer()
+  if not (package.loaded.snacks or Snacks) then
+    vim.notify("Snacks not available yet — wait for startup to finish.", vim.log.levels.WARN)
+    return
+  end
+  local pickers = Snacks.picker.get({ source = "explorer" })
+  if #pickers > 0 and not pickers[1].closed then
+    pickers[1]:show()
+    pickers[1]:focus()
+    return
+  end
+  Snacks.explorer.open()
 end
 
 --- Quit all windows (alias for :qa). Pass true for force quit (:qa!).
@@ -74,6 +85,7 @@ end
 --- Register cmdline abbreviations (typing :lazy at the : prompt)
 function M.setup_abbrevs()
   local abbrev = vim.cmd.cabbrev
+  abbrev("menu", "Lazy")
   abbrev("lazy", "Lazy")
   abbrev("extras", "LazyExtras")
   abbrev("cheatsheet", "Cheatsheet")

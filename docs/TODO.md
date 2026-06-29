@@ -20,7 +20,7 @@ All six project-root dotfiles are necessary and non-duplicative: `.editorconfig`
 |------|----------------|-------|
 | NvChad UI (statusline, tabufline, cheatsheet, term hide) | Yes | `:cheatsheet`, tabufline theme btn |
 | base46 + theme picker | Yes | `:theme`; custom `astrodark` / `astrolight`; catppuccin excluded from picker |
-| Dashboard cheatsheet + themes | Yes | keys `h`, `t` |
+| Dashboard cheatsheet + themes | Yes | dashboard `h`/`t`/`l`; global `t` = theme |
 | gitsigns, mason, lspconfig, treesitter, which-key | Yes | LazyVim + nvimgt overrides |
 | nvim-web-devicons | Yes | NvChad tabufline + LazyVim mini.icons mock |
 | friendly-snippets | Yes | blink.cmp dependency |

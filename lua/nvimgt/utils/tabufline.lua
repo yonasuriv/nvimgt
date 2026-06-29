@@ -148,7 +148,7 @@ function M.buffers()
   return table.concat(buffers) .. new_file_btn .. txt("%=", "Fill")
 end
 
---- Workspaces (Neovim tabpages): new workspace + WORKSPACES toggle + tab numbers
+--- Workspaces (Neovim tabpages): theme toggle, new workspace, WORKSPACES toggle + tab numbers
 function M.tabs()
   local g = vim.g
   local fn = vim.fn
@@ -156,8 +156,9 @@ function M.tabs()
 
   g.TbTabsToggled = g.TbTabsToggled or 0
 
+  local toggle_theme = btn(vim.g.toggle_theme_icon or "   ", "ThemeToggleBtn", "Toggle_theme")
   local new_ws = btn(" 󰐕 ", "TabNewBtn", "NewTab")
-  local ws_toggle = btn(" WORKSPACES ", "TabTitle", "ToggleTabs")
+  local ws_toggle = btn(" WORKSPACE ", "TabTitle", "ToggleTabs")
   local small_btn = btn(" 󰅁 ", "TabTitle", "ToggleTabs")
   local toggle = g.TbTabsToggled == 1 and small_btn or ws_toggle
 
@@ -170,13 +171,11 @@ function M.tabs()
     end
   end
 
-  return new_ws .. toggle .. result
+  return toggle_theme .. new_ws .. toggle .. result
 end
 
 function M.btns()
-  local toggle_theme = btn(vim.g.toggle_theme_icon or "   ", "ThemeToggleBtn", "Toggle_theme")
-  local quit = btn(" 󰅖 ", "CloseAllBufsBtn", "CloseAllBufs")
-  return toggle_theme .. quit
+  return btn(" 󰅖 ", "CloseAllBufsBtn", "CloseAllBufs")
 end
 
 function M.new_file()

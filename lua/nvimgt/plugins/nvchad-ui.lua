@@ -28,6 +28,10 @@ return {
     config = function()
       require("nvchad")
       require("nvimgt.utils.tabufline").setup()
+
+      vim.api.nvim_create_user_command("NvCheatsheet", function()
+        require("nvimgt.utils.cheatsheet").toggle()
+      end, { force = true, desc = "nvimGT keymap cheatsheet" })
     end,
   },
 }

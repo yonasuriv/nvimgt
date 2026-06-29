@@ -76,8 +76,8 @@ Configured in `lua/nvimgt/plugins/dashboard.lua` (Snacks). Arrays like `preset.k
 ## Statusline & tabline
 
 - `nvchad-ui.lua` — [NvChad/ui](https://github.com/NvChad/ui) with `NvChad/base46` for highlights.
-- `chadrc.lua` — `M.ui.statusline` and `M.ui.tabufline` (see `:h nvui`).
-- `init.lua` sets `vim.g.base46_cache`; `config/lazy.lua` loads `defaults` + `statusline` cache after lazy setup.
+- `lua/nvimgt/config/theme.lua` — `M.ui.statusline`, `M.ui.tabufline`, and base46 theme (see `:h nvui`).
+- `init.lua` sets `vim.g.base46_cache` and preloads `chadrc` → `nvimgt.config.theme` for NvChad/ui; `config/lazy.lua` loads `defaults` + `statusline` cache after lazy setup.
 
 ## Keymaps
 
