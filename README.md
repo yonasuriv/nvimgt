@@ -11,7 +11,8 @@
 nvimGT is a fast, aesthetic, and extensible Neovim distribution with a refined UI, strong defaults, and a carefully selected plugin set. It is designed to provide a smooth out-of-the-box experience with lazy-load-first plugin management powered by [lazy.nvim](https://github.com/folke/lazy.nvim), while supporting the broader LazyVim plugin ecosystem. 
 
 > [!NOTE]
-> This project started as a personal experiment after years of working with [Overleaf](https://github.com/overleaf/overleaf), Lua, LaTeX, and LuaLaTeX-based editing workflows. It is derived from and inspired by the work of [NvChad](https://github.com/NvChad/NvChad) and [LazyVim](https://github.com/LazyVim/LazyVim).
+> This project started as a personal experiment after years of working with [Overleaf](https://github.com/overleaf/overleaf), Lua, LaTeX, and LuaLaTeX-based editing workflows. \
+> It is derived from and inspired by the work of [LazyVim](https://github.com/LazyVim/LazyVim), [AstronNvim](https://github.com/astronvim/astronvim) and [NvChad](https://github.com/NvChad/NvChad).
 >
 > nvimGT should be treated as a personal Neovim configuration distribution. It is not intended to replace, supersede, or diminish any of the projects it builds on or takes inspiration from.
 
@@ -85,16 +86,32 @@ nvimGT ships with a curated plugin stack focused on speed, aesthetics, and pract
 
 ### Installation
 
-You can install **nvimGT** in one of three ways.
+You can install **nvimGT** in one line (recommended), or manually.
+
+#### Quick install (curl)
+
+Installs to `~/.config/nvimgt`, adds a `nvimgt` shell alias, and bootstraps plugins. Your existing `~/.config/nvim` is left untouched.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/yonasuriv/nvimGT/refs/heads/main/scripts/install.sh | bash
+```
+
+Then open a new shell (or `source ~/.zshrc`) and run:
+
+```bash
+nvimgt
+```
+
+Skip plugin bootstrap: `NVIMGT_SKIP_PLUGINS=1 curl -fsSL … | bash`
 
 #### 1. Try it without touching your current Neovim config
 
 This installs nvimGT under a separate app name, so your existing `~/.config/nvim` setup stays untouched.
 
 ```bash
-git clone https://github.com/yonasuriv/nvimgt ~/.config/nvimgt
+git clone https://github.com/yonasuriv/nvimGT ~/.config/nvimgt
 NVIM_APPNAME=nvimgt nvim
-````
+```
 
 `lazy.nvim` will bootstrap automatically on first launch and install the required plugins.
 
@@ -103,7 +120,7 @@ NVIM_APPNAME=nvimgt nvim
 Install nvimGT as a separate Neovim app and create a dedicated command for it.
 
 ```bash
-git clone https://github.com/yonasuriv/nvimgt ~/.config/nvimgt
+git clone https://github.com/yonasuriv/nvimGT ~/.config/nvimgt
 alias nvimgt='NVIM_APPNAME=nvimgt nvim'
 ```
 
@@ -138,7 +155,7 @@ mv ~/.config/nvim ~/.config/nvim.bak
 2. Clone nvimGT as your default configuration.
 
 ```
-git clone https://github.com/yonasuriv/nvimgt ~/.config/nvim
+git clone https://github.com/yonasuriv/nvimGT ~/.config/nvim
 ```
 
 Launch nvim normally using nvimGT under the hood:
@@ -164,10 +181,10 @@ When iterating on nvimGT from a cloned repository, use the sync script to copy c
 
 ```bash
 # One-time sync
-bash scripts/sync-nvimgt.sh
+bash scripts/sync.sh
 
 # Auto-sync on file changes
-bash scripts/sync-nvimgt.sh --watch
+bash scripts/sync.sh --watch
 ```
 
 Then test with:
@@ -183,7 +200,8 @@ nvimgt/
 ├── init.lua                    # Neovim entry point
 ├── config.json                 # Plugin selection lock
 ├── scripts/
-│   └── sync-nvimgtg.sh         # Dev helper: sync working dir → ~/.config/nvimgt
+│   ├── install.sh              # curl | bash installer
+│   └── sync.sh                 # Dev helper: sync working dir → ~/.config/nvimgt
 └── lua/
     ├── config/
     │   ├── lazy.lua            # lazy.nvim bootstrap + plugin spec imports
@@ -203,6 +221,13 @@ nvimgt/
 - [Architecture](docs/spec/architecture.md)
 - [Configuration](docs/spec/configuration.md)
 - [Development](docs/spec/development.md)
+
+### Recommended resources
+
+- [lazy.nvim Docs](https://lazy.folke.io/)
+- [LazyVim Docs](https://www.lazyvim.org/)
+- [AstroNvim Docs](https://docs.astronvim.com/)
+- [NvChad Docs](https://nvchad.com/docs/config/walkthrough)
 
 ## License
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Sync nvimGT dev config to the deployed location for live testing.
 # Usage:
-#   ./sync-nvimgt.sh            # one-time copy
-#   ./sync-nvimgt.sh --watch    # copy now, then watch for changes and re-copy
+#   ./scripts/sync.sh            # one-time copy
+#   ./scripts/sync.sh --watch    # copy now, then watch for changes and re-copy
 
 set -euo pipefail
 

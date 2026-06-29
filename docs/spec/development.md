@@ -10,11 +10,11 @@ Deployed config: `~/.config/nvimgt` via `NVIM_APPNAME=nvimgt nvim`.
 
 ## Sync script
 
-`scripts/sync-nvimgt.sh` copies the working tree to `~/.config/nvimgt`:
+`scripts/sync.sh` copies the working tree to `~/.config/nvimgt`:
 
 ```bash
-bash scripts/sync-nvimgt.sh
-bash scripts/sync-nvimgt.sh --watch   # requires watchdog
+bash scripts/sync.sh
+bash scripts/sync.sh --watch   # requires watchdog
 ```
 
 ## Testing
@@ -47,7 +47,9 @@ nvimgt/
 ├── config.json                 # Shipped extras state (LazyVim; reset with :reload)
 ├── .stylua.toml
 ├── reference/lazyvim/       # upstream snapshots (not loaded)
-├── scripts/sync-nvimgt.sh
+├── scripts/
+│   ├── install.sh
+│   └── sync.sh
 ├── docs/
 │   ├── architecture.md
 │   ├── configuration.md
@@ -66,7 +68,7 @@ nvimgt/
         ├── dashboard.lua
         ├── gitsigns.lua
         ├── mason.lua
-        ├── nvchad-ui.lua
+        ├── ui.lua
         ├── colorscheme.lua
         └── treesitter.lua
 ```
