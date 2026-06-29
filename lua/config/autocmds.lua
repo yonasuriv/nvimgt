@@ -1,2 +1,0 @@
--- nvimGT autocommands
--- LazyVim default autocommands are loaded automatically; add personal ones here.

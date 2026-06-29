@@ -1,2 +1,0 @@
--- nvimGT keymaps
--- LazyVim default keymaps are loaded automatically; add personal overrides here.

@@ -1,0 +1,3 @@
+-- nvimGT autocommands
+-- Distribution defaults load first; add personal autocommands here.
+-- Command aliases (:lazy, :extras, :die, :bye) live in config/lazy.lua.

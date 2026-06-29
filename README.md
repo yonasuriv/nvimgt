@@ -1,52 +1,39 @@
-<div align="center" id="madewithlua">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset=".github/assets/nvimgt-dark.png">
-    <source media="(prefers-color-scheme: white)" srcset=".github/assets/nvimgt-white.png">
-    <img src=".github/assets/nvimgt-dark.png" alt="nvimGT">
-  </picture>
+<div align="center">
+
+# nvimGT
+
+eXtended Line-editor Visual Improved Mode
+
 </div>
 
 ## Description
 
-nvimGT is a blazing fast, aesthetic and extensible neovim configuration with a refined UI, strong defaults, and a carefully selected plugin set designed for a smooth out-of-the-box experience.
+nvimGT is a fast, aesthetic Neovim configuration with a refined UI, strong defaults, and lazyload-first plugin management via [lazy.nvim](https://github.com/folke/lazy.nvim). It includes [LazyVim](https://github.com/LazyVim/LazyVim) support for LSP, extras, and core plugin specs.
 
 ## Requirements
 
-- **Neovim** ≥ 0.10
+- **Neovim** ≥ 0.11.2
 - **Git**
-- A [Nerd Font](https://www.nerdfonts.com/) — optional but heavily recommended for icons tp render properly.
+- A [Nerd Font](https://www.nerdfonts.com/) — recommended for icons to render properly
 - A terminal with [true color](https://github.com/termstandard/colors) support
 
-**Recommended:**
-
-| Tool | Purpose |
-|---|---|
-| `ripgrep` | Live grep in pickers |
-| `fd` | Faster file finding |
-| `gcc` or `clang` | Treesitter parser compilation |
-| `node` | Many LSP servers require it |
-| `lazygit` | In-editor Git UI (`<leader>gg`) |
+**Recommended tools:** `ripgrep`, `fd`, `gcc`/`clang`, `node`, `lazygit`
 
 ## Installation
 
-### Try it alongside your current config
-
-This clones nvimGT under a separate app name so your existing Neovim setup is untouched:
+### Try alongside your current config
 
 ```bash
 git clone https://github.com/yonasuriv/nvimgt ~/.config/nvimgt
 NVIM_APPNAME=nvimgt nvim
 ```
 
-lazy.nvim bootstraps itself on the first launch and installs everything automatically.
+lazy.nvim bootstraps on first launch and installs plugins automatically.
 
 ### Make it your default config
 
 ```bash
-# Optional: back up your existing config
-mv ~/.config/nvim ~/.config/nvim.bak
-
-# Clone nvimGT as the default
+mv ~/.config/nvim ~/.config/nvim.bak   # optional backup
 git clone https://github.com/yonasuriv/nvimgt ~/.config/nvim
 nvim
 ```
@@ -55,88 +42,52 @@ nvim
 
 ### Dashboard
 
-Custom nvimGT ASCII-art logo on startup, styled with the AstroDark palette — near-white header, red icons, grey menu text, and a dimmed plugin-count footer. The startup line shows `X/Y plugins loaded in XX.ZZ ms` without distracting icons.
+Custom nvimGT ASCII logo on startup (AstroDark palette). Startup line shows `X/Y plugins loaded in XX.ZZ ms`.
 
-### Buffer / Tab Bar
+### Buffer / tab bar
 
-Built with [`heirline.nvim`](https://github.com/rebelot/heirline.nvim). Each buffer tab shows a filetype icon, the filename, a modified indicator (●), and a red close button. Tab-page numbers appear on the right when more than one Vim tab is open. When the file-explorer sidebar is open, a bold **Explorer** label fills the offset above it.
+[heirline.nvim](https://github.com/rebelot/heirline.nvim) tabline with file icons, modified indicator, and close button. Bold **Explorer** label fills the offset above the sidebar.
 
 ### Statusline
 
-Built with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim), themed to AstroDark. Sections left → right:
-
-| Section | Contents |
-|---|---|
-| Left | Mode pill · Git branch · Working directory |
-| Center | Filetype icon · File path · Diagnostics |
-| Right | LSP progress · LSP clients · Lazy updates · Git diff |
-| Far right | Cursor position · Clock (HH:MM) |
+[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) — mode, git, cwd, diagnostics, LSP, lazyload updates, git diff, progress, clock.
 
 ### Colorscheme
 
-AstroDark via [`AstroNvim/astrotheme`](https://github.com/AstroNvim/astrotheme). Highlight overrides — including all dashboard colors — live in `lua/plugins/colorscheme.lua` under `highlights.global`, so they apply on top of the theme without patching it.
+AstroDark via [astrotheme](https://github.com/AstroNvim/astrotheme). Dashboard highlights in `lua/nvimgt/plugins/colorscheme.lua`.
 
 ### Completion
 
-[`blink.cmp`](https://github.com/saghen/blink.cmp) with documentation auto-shown after a short delay.
-
-## File Layout
-
-```
-nvimgt/
-├── init.lua                    # Neovim entry point
-├── plugins.json                # Plugin selection lock
-├── scripts/
-│   └── sync-nvimgt-config.sh   # Dev helper: sync working dir → ~/.config/nvimgt
-└── lua/
-    ├── config/
-    │   ├── lazy.lua            # lazy.nvim bootstrap + plugin spec imports
-    │   ├── options.lua         # Neovim option overrides (tabline, statusline)
-    │   ├── keymaps.lua         # Personal keymaps
-    │   └── autocmds.lua        # Personal autocommands
-    └── plugins/
-        ├── colorscheme.lua     # AstroDark theme + highlight overrides
-        ├── dashboard.lua       # Snacks dashboard (logo, menu items, startup line)
-        ├── statusline.lua      # Lualine statusline configuration
-        ├── tabline.lua         # Heirline buffer/tab bar
-        └── completion.lua      # Blink.cmp completion settings
-```
+[blink.cmp](https://github.com/saghen/blink.cmp) with auto-shown documentation.
 
 ## Customizing
 
-The short version:
+- **Plugins** — add specs in `lua/nvimgt/plugins/`
+- **Keymaps** — `lua/nvimgt/config/keymaps.lua`
+- **Extras** — `:extras` (LazyVim packs; state in shipped `config.json`)
+- **Reset extras** — `:NvimgtFresh` then restart (or delete `config.json`)
+- **Guide** — [docs/spec/configuration.md](docs/spec/configuration.md)
+- **Architecture** — [docs/spec/architecture.md](docs/spec/architecture.md)
+- **Audit** — [docs/audit/00-summary.md](docs/audit/00-summary.md)
 
-- **Add a plugin** — drop a `.lua` spec in `lua/plugins/`. lazy.nvim picks it up automatically.
-- **Override a plugin** — use the same plugin name in a new file; lazy.nvim deep-merges the opts.
-- **Keymaps** — add to `lua/config/keymaps.lua`.
-- **Autocommands** — add to `lua/config/autocmds.lua`.
-- **LazyVim extras** — run `:LazyExtras` to browse and enable language/tool support packs.
-
-See **[docs/configuration.md](docs/configuration.md)** for a full walkthrough.
-
-## Development Workflow
-
-When iterating on the config from a working directory (e.g., this cloned repo) while testing via `NVIM_APPNAME=nvimgt nvim`, use the sync script to keep the deployed copy up to date:
+## Development
 
 ```bash
-# One-time copy
-bash scripts/sync-nvimgt-config.sh
-
-# Watch for changes and re-copy automatically
-bash scripts/sync-nvimgt-config.sh --watch
+bash scripts/sync-nvimgt.sh --watch
+NVIM_APPNAME=nvimgt nvim
 ```
 
-See **[docs/development.md](docs/development.md)** for the full dev workflow.
+See [docs/spec/development.md](docs/spec/development.md).
 
 ## Credits
 
-This work was heavily inspired from the following repositories:
+Inspired by and built with patterns from:
 
-- [LazyVim](https://github.com/LazyVim/LazyVim)
-- [AstroNvim](https://github.com/AstroNvim/AstroNvim)
-- [NvChad](https://github.com/NvChad/NvChad)
+- [LazyVim](https://github.com/LazyVim/LazyVim) — base plugin specs and extras system
+- [AstroNvim](https://github.com/AstroNvim/AstroNvim) — AstroDark theme
+- [NvChad](https://github.com/NvChad/NvChad) — keymap and UI patterns (salvaged where noted)
 
-Want to create your own personal nvim configuration? Take a look at [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) repo.
+New to Neovim config? See [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
 
 ## License
 
