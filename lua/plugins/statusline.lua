@@ -1,4 +1,4 @@
--- XLVIM statusline: LazyVim section structure with AstroDark colors
+-- nvimGT statusline: section structure with
 return {
   {
     "nvim-lualine/lualine.nvim",

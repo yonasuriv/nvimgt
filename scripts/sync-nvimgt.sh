@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-# Sync XLVIM dev config to the deployed location for live testing.
+# Sync nvimGT dev config to the deployed location for live testing.
 # Usage:
-#   ./sync-xlvim-config.sh            # one-time copy
-#   ./sync-xlvim-config.sh --watch    # copy now, then watch for changes and re-copy
+#   ./sync-nvimgt.sh            # one-time copy
+#   ./sync-nvimgt.sh --watch    # copy now, then watch for changes and re-copy
 
 set -euo pipefail
 
-SRC="../"
-DST="$HOME/.config/xlvim"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SRC="$SCRIPT_DIR/../"
+DST="$HOME/.config/nvimgt"
 
 do_sync() {
   rsync -a --delete \
@@ -15,13 +16,13 @@ do_sync() {
     --exclude '*.swp' \
     --exclude '*~' \
     "$SRC/" "$DST/"
-  echo "[xlvim] synced at $(date '+%H:%M:%S')"
+  echo "[nvimgt] synced at $(date '+%H:%M:%S')"
 }
 
 case "${1:-}" in
   --watch)
     do_sync
-    echo "[xlvim] watching $SRC for changes (Ctrl-C to stop)..."
+    echo "[nvimgt] watching $SRC for changes (Ctrl-C to stop)..."
     watchmedo shell-command \
       --patterns="*.lua;*.vim;*.toml;*.json;*.md" \
       --recursive \

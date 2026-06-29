@@ -1,4 +1,4 @@
--- XLVIM completion: show documentation window automatically
+-- nvimGT completion: show documentation window automatically
 return {
   {
     "saghen/blink.cmp",

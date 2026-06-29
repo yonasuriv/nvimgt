@@ -1,6 +1,6 @@
 # Configuration Guide
 
-XLVIM is built on [LazyVim](https://github.com/LazyVim/LazyVim), so the full LazyVim configuration model applies. This guide covers XLVIM-specific patterns and the most common customization tasks.
+nvimGT is built on [LazyVim](https://github.com/LazyVim/LazyVim), so the full LazyVim configuration model applies. This guide covers nvimGT-specific patterns and the most common customization tasks.
 
 ## How Plugin Specs Are Loaded
 
@@ -10,7 +10,7 @@ XLVIM is built on [LazyVim](https://github.com/LazyVim/LazyVim), so the full Laz
 require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },  -- LazyVim defaults
-    { import = "plugins" },                               -- XLVIM overrides
+    { import = "plugins" },                               -- nvimGT overrides
   },
   ...
 })
@@ -178,7 +178,7 @@ Heirline highlight values must be either a **highlight group name** (string) or 
 
 ## Adding Language Support
 
-XLVIM inherits LazyVim's extras system. Run `:LazyExtras` to browse available language and tool packs (LSP, formatter, linter, treesitter) and toggle them on. Enabled extras are recorded in `lazyvim.json`.
+nvimGT inherits LazyVim's extras system. Run `:LazyExtras` to browse available language and tool packs (LSP, formatter, linter, treesitter) and toggle them on. Enabled extras are recorded in `plugins.json`.
 
 ## Keymaps
 

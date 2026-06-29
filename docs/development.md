@@ -1,29 +1,29 @@
 # Development Workflow
 
-This document covers the recommended workflow for iterating on the XLVIM config itself.
+This document covers the recommended workflow for iterating on the nvimGT config itself.
 
 ## Setup
 
 Clone the repo to a working directory separate from your deployed config:
 
 ```bash
-git clone https://github.com/yonasuriv/xlvim ~/Desktop/xlvim
+git clone https://github.com/yonasuriv/nvimgt ~/Desktop/nvimgt
 ```
 
-The deployed config lives at `~/.config/xlvim` and is what `NVIM_APPNAME=xlvim nvim` reads. Keep the two in sync using the sync script (see below).
+The deployed config lives at `~/.config/nvimgt` and is what `NVIM_APPNAME=nvimgt nvim` reads. Keep the two in sync using the sync script (see below).
 
 ## Sync Script
 
-`scripts/sync-xlvim-config.sh` uses `rsync` to copy changes from the working directory to the deployed location.
+`scripts/sync-nvimgt-config.sh` uses `rsync` to copy changes from the working directory to the deployed location.
 
 Run from the repo root:
 
 ```bash
 # Copy once
-bash scripts/sync-xlvim-config.sh
+bash scripts/sync-nvimgt-config.sh
 
 # Watch for file changes and copy automatically (requires watchdog)
-bash scripts/sync-xlvim-config.sh --watch
+bash scripts/sync-nvimgt-config.sh --watch
 ```
 
 The `--watch` mode requires [`watchdog`](https://pypi.org/project/watchdog/) (`pip install watchdog`), which ships the `watchmedo` CLI. It monitors `*.lua`, `*.vim`, `*.toml`, `*.json`, and `*.md` files recursively and triggers a sync on any change.
@@ -32,16 +32,16 @@ Files excluded from sync: `.git/`, swap files (`*.swp`), and editor backup files
 
 ## Testing Changes
 
-After syncing, launch Neovim with the XLVIM app name:
+After syncing, launch Neovim with the nvimGT app name:
 
 ```bash
-NVIM_APPNAME=xlvim nvim
+NVIM_APPNAME=nvimgt nvim
 ```
 
 To check for startup errors without opening the UI:
 
 ```bash
-NVIM_APPNAME=xlvim nvim --headless -c "qa" 2>&1
+NVIM_APPNAME=nvimgt nvim --headless -c "qa" 2>&1
 ```
 
 A clean run produces no output. Any Lua errors or missing module warnings will be printed to stderr.
@@ -61,12 +61,12 @@ Inside Neovim:
 ## Project Structure
 
 ```
-xlvim/
+nvimgt/
 ├── init.lua                    # Neovim entry point — do not edit
-├── lazyvim.json                # Tracks which LazyVim extras are enabled
+├── plugins.json                # Tracks which LazyVim extras are enabled
 ├── stylua.toml                 # StyLua formatter config for Lua files
 ├── scripts/
-│   └── sync-xlvim-config.sh   # Dev sync helper
+│   └── sync-nvimgt-config.sh   # Dev sync helper
 ├── docs/
 │   ├── configuration.md        # Full configuration guide
 │   └── development.md          # This file

@@ -1,33 +1,18 @@
 <div align="center" id="madewithlua">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/xlvim-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset=".github/assets/xlvim-white.png">
-    <img src=".github/assets/xlvim-dark.png" alt="XLVIM" width="110" height="100">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/nvimgt-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset=".github/assets/nvimgt-white.png">
+    <img src=".github/assets/nvimgt-dark.png" alt="nvimGT" width="110" height="100">
   </picture>
 </div>
 
-<h1 align="center">e<b>X</b>tended Line-editor with Visual Improved Mode</h1>
-
-<p align="center">
-  A Neovim configuration that fuses the best of
-  <a href="https://github.com/LazyVim/LazyVim">LazyVim</a>,
-  <a href="https://github.com/AstroNvim/AstroNvim">AstroNvim</a>, and
-  <a href="https://github.com/NvChad/NvChad">NvChad</a> into one cohesive setup.
-</p>
+<h1 align="center">nvim<b>GT</b></h1>
 
 ---
 
-## What XLVIM Is
+## What nvimGT Is
 
-XLVIM is a curated Neovim configuration built on [LazyVim](https://github.com/LazyVim/LazyVim) as its plugin foundation, extended with the visual identity and UX elements of AstroNvim and NvChad:
-
-| Source | What XLVIM takes from it |
-|---|---|
-| **LazyVim** | Plugin manager, LSP/formatter/linter wiring, treesitter, all extras |
-| **AstroNvim** | AstroDark colorscheme, heirline-based buffer/tab bar |
-| **NvChad** | Statusline layout and section order |
-
-None of AstroNvim's or NvChad's core systems are installed — XLVIM only borrows their visual ideas, avoiding distribution conflicts.
+nvimGT is a blazing fast, aesthetic and extensible neovim configuration with a refined UI, strong defaults, and a carefully selected plugin set designed for a smooth out-of-the-box experience.
 
 ## Requirements
 
@@ -50,11 +35,11 @@ None of AstroNvim's or NvChad's core systems are installed — XLVIM only borrow
 
 ### Try it alongside your current config
 
-This clones XLVIM under a separate app name so your existing Neovim setup is untouched:
+This clones nvimGT under a separate app name so your existing Neovim setup is untouched:
 
 ```bash
-git clone https://github.com/yonasuriv/xlvim ~/.config/xlvim
-NVIM_APPNAME=xlvim nvim
+git clone https://github.com/yonasuriv/nvimgt ~/.config/nvimgt
+NVIM_APPNAME=nvimgt nvim
 ```
 
 lazy.nvim bootstraps itself on the first launch and installs everything automatically.
@@ -65,8 +50,8 @@ lazy.nvim bootstraps itself on the first launch and installs everything automati
 # Optional: back up your existing config
 mv ~/.config/nvim ~/.config/nvim.bak
 
-# Clone XLVIM as the default
-git clone https://github.com/yonasuriv/xlvim ~/.config/nvim
+# Clone nvimGT as the default
+git clone https://github.com/yonasuriv/nvimgt ~/.config/nvim
 nvim
 ```
 
@@ -74,7 +59,7 @@ nvim
 
 ### Dashboard
 
-Custom XLVIM ASCII-art logo on startup, styled with the AstroDark palette — near-white header, red icons, grey menu text, and a dimmed plugin-count footer. The startup line shows `X/Y plugins loaded in XX.ZZ ms` without distracting icons.
+Custom nvimGT ASCII-art logo on startup, styled with the AstroDark palette — near-white header, red icons, grey menu text, and a dimmed plugin-count footer. The startup line shows `X/Y plugins loaded in XX.ZZ ms` without distracting icons.
 
 ### Buffer / Tab Bar
 
@@ -102,11 +87,11 @@ AstroDark via [`AstroNvim/astrotheme`](https://github.com/AstroNvim/astrotheme).
 ## File Layout
 
 ```
-xlvim/
+nvimgt/
 ├── init.lua                    # Neovim entry point
-├── lazyvim.json                # LazyVim plugin selection lock
+├── plugins.json                # Plugin selection lock
 ├── scripts/
-│   └── sync-xlvim-config.sh   # Dev helper: sync working dir → ~/.config/xlvim
+│   └── sync-nvimgt-config.sh   # Dev helper: sync working dir → ~/.config/nvimgt
 └── lua/
     ├── config/
     │   ├── lazy.lua            # lazy.nvim bootstrap + plugin spec imports
@@ -135,23 +120,27 @@ See **[docs/configuration.md](docs/configuration.md)** for a full walkthrough.
 
 ## Development Workflow
 
-When iterating on the config from a working directory (e.g., `~/Desktop/xlvim`) while testing via `NVIM_APPNAME=xlvim nvim`, use the sync script to keep the deployed copy up to date:
+When iterating on the config from a working directory (e.g., this cloned repo) while testing via `NVIM_APPNAME=nvimgt nvim`, use the sync script to keep the deployed copy up to date:
 
 ```bash
 # One-time copy
-bash scripts/sync-xlvim-config.sh
+bash scripts/sync-nvimgt-config.sh
 
 # Watch for changes and re-copy automatically
-bash scripts/sync-xlvim-config.sh --watch
+bash scripts/sync-nvimgt-config.sh --watch
 ```
 
 See **[docs/development.md](docs/development.md)** for the full dev workflow.
 
 ## Credits
 
-- [LazyVim](https://github.com/LazyVim/LazyVim) by [@folke](https://github.com/folke) — plugin foundation and best-in-class defaults
-- [AstroNvim](https://github.com/AstroNvim/AstroNvim) — AstroDark colorscheme and tabline design language
-- [NvChad](https://github.com/NvChad/NvChad) — statusline layout inspiration
+This work was heavily inspired from the following repositories:
+
+- [LazyVim](https://github.com/LazyVim/LazyVim)
+- [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+- [NvChad](https://github.com/NvChad/NvChad)
+
+Want to create your own personal nvim configuration? Take a look at [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) work.
 
 ## License
 

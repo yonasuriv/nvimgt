@@ -1,6 +1,6 @@
-# Contributing to XLVIM
+# Contributing to nvimGT
 
-XLVIM is a personal Neovim configuration, but improvements, bug reports, and suggestions are welcome.
+nvimGT is a personal Neovim configuration, but improvements, bug reports, and suggestions are welcome.
 
 ## Reporting Issues
 
@@ -15,13 +15,13 @@ Open an issue with:
 
 1. Fork the repo and create a branch from `main`.
 2. Make your changes in `lua/plugins/` or `lua/config/`.
-3. Test with `NVIM_APPNAME=xlvim nvim --headless -c "qa" 2>&1` — no output means no startup errors.
+3. Test with `NVIM_APPNAME=nvimgt nvim --headless -c "qa" 2>&1` — no output means no startup errors.
 4. Format Lua files with StyLua (`stylua lua/`).
 5. Open a pull request with a clear description of what changed and why.
 
 ## Guidelines
 
-**Keep it focused.** XLVIM is not a plugin distribution — it is a curated personal config. Plugins should have a clear, concrete benefit and not duplicate existing functionality. Prefer configuring what is already installed over adding new plugins.
+**Keep it focused.** nvimGT is not a plugin distribution — it is a curated personal config. Plugins should have a clear, concrete benefit and not duplicate existing functionality. Prefer configuring what is already installed over adding new plugins.
 
 **No breaking changes to the core design.** The three-way fusion of LazyVim + AstroDark + NvChad-style statusline is intentional. Changes that remove or replace one of these pillars will not be accepted.
 

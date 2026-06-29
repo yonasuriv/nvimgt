@@ -18,7 +18,7 @@ require("lazy").setup({
   spec = {
     -- LazyVim distribution
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- XLVIM custom plugins and overrides
+    -- nvimGT custom plugins and overrides
     { import = "plugins" },
   },
   defaults = {

@@ -1,6 +1,6 @@
--- XLVIM tabline: AstroNvim-style top buffer + tab bar, built with heirline
+-- nvimGT tabline: top buffer + tab bar, built with heirline
 return {
-  -- Disable LazyVim's default bufferline so we can use our own tabline
+  -- Disable default bufferline
   { "akinsho/bufferline.nvim", enabled = false },
 
   {
@@ -91,7 +91,7 @@ return {
             minwid = function(self)
               return self.bufnr
             end,
-            name = "xlvim_tabline_close_buf",
+            name = "nvimgt_tabline_close_buf",
           },
         },
         hl = function(self)
@@ -106,7 +106,7 @@ return {
           minwid = function(self)
             return self.bufnr
           end,
-          name = "xlvim_tabline_switch_buf",
+          name = "nvimgt_tabline_switch_buf",
         },
       }
 

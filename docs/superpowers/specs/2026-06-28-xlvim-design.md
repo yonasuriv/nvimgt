@@ -1,4 +1,4 @@
-# XLVIM Design Spec
+# nvimGT Design Spec
 
 ```text
           d8b            d8,
@@ -10,7 +10,7 @@
 d8P' `?8b  88b`?888P'  d88' d88' d88'  88b
 ```
 
-**Goal:** Build a personal Neovim configuration repo named **XLVIM** that uses **LazyVim** as the plugin distribution, applies the **AstroNvim AstroDark** colorscheme, adds an **AstroNvim-style top buffer/tab bar**, and restyles the bottom statusline to match **NvChad**.
+**Goal:** Build a personal Neovim configuration repo named **nvimGT** that uses **LazyVim** as the plugin distribution, applies the **AstroNvim AstroDark** colorscheme, adds an **AstroNvim-style top buffer/tab bar**, and restyles the bottom statusline to match **NvChad**.
 
 ## Architecture
 
@@ -34,7 +34,7 @@ d8P' `?8b  88b`?888P'  d88' d88' d88'  88b
 ## File Layout
 
 ```
-xlvim/
+nvimgt/
 ├── init.lua
 ├── README.md
 ├── stylua.toml
@@ -43,7 +43,7 @@ xlvim/
 └── lua/
     ├── config/
     │   ├── lazy.lua      # bootstrap lazy.nvim, import LazyVim + local plugins
-    │   ├── options.lua   # XLVIM options (global statusline, etc.)
+    │   ├── options.lua   # nvimGT options (global statusline, etc.)
     │   ├── keymaps.lua   # user keymaps
     │   └── autocmds.lua  # user autocommands
     └── plugins/
@@ -57,7 +57,7 @@ xlvim/
 1. **No AstroNvim or NvChad core plugins are installed.** We only borrow their visual ideas. This avoids distribution conflicts (e.g., `astrocore` vs LazyVim options/keymaps).
 2. **`lualine` is kept instead of porting NvChad statusline to `heirline`.** It integrates cleanly with LazyVim and already supports the `astrodark` theme, while still allowing a NvChad-like section order.
 3. **`bufferline.nvim` is disabled.** A single `heirline` tabline gives us both buffers and tab pages in one bar, matching AstroNvim.
-4. **All branding/comments in the local plugin files use XLVIM**, not LazyVim/AstroNvim/NvChad.
+4. **All branding/comments in the local plugin files use nvimGT**, not LazyVim/AstroNvim/NvChad.
 
 ## Success Criteria
 

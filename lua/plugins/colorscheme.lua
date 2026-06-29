@@ -1,4 +1,4 @@
--- XLVIM colorscheme: AstroNvim AstroDark + dashboard highlight overrides
+-- nvimGT colorscheme: AstroNvim AstroDark + dashboard highlight overrides
 return {
   {
     "AstroNvim/astrotheme",
