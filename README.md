@@ -6,6 +6,8 @@
   </picture>
 </div>
 
+
+
 ## Description
 
 nvimGT is a fast, aesthetic, and extensible Neovim distribution with a refined UI, strong defaults, and a carefully selected plugin set. It is designed to provide a smooth out-of-the-box experience with lazy-load-first plugin management powered by [lazy.nvim](https://github.com/folke/lazy.nvim), while supporting the broader LazyVim plugin ecosystem. 
@@ -64,6 +66,16 @@ nvimGT ships with a curated plugin stack focused on speed, aesthetics, and pract
 
 > **Never get stuck again**: use `:bye` or `:die` to exit nvim instantly. \
 > Both are aliases for `:qa!`, which quits all windows without saving.
+
+## Preview
+
+<div align="center" id="madewithlua">
+  <picture>
+    <img src=".github/assets/Screenshot 2026-06-29 090927.png" alt="nvimGT">
+    <img src=".github/assets/Screenshot 2026-06-29 091053.png" alt="nvimGT">
+    <img src=".github/assets/Screenshot 2026-06-29 091020.png" alt="nvimGT">
+  </picture>
+</div>
 
 ## Getting Started
 
