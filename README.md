@@ -1,16 +1,12 @@
 <div align="center" id="madewithlua">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/nvimgt-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset=".github/assets/nvimgt-white.png">
-    <img src=".github/assets/nvimgt-dark.png" alt="nvimGT" width="110" height="100">
+    <source media="(prefers-color-scheme: light)" srcset=".github/assets/nvimgt-dark.png">
+    <source media="(prefers-color-scheme: white)" srcset=".github/assets/nvimgt-white.png">
+    <img src=".github/assets/nvimgt-dark.png" alt="nvimGT">
   </picture>
 </div>
 
-<h1 align="center">nvim<b>GT</b></h1>
-
----
-
-## What nvimGT Is
+## Description
 
 nvimGT is a blazing fast, aesthetic and extensible neovim configuration with a refined UI, strong defaults, and a carefully selected plugin set designed for a smooth out-of-the-box experience.
 
@@ -18,7 +14,7 @@ nvimGT is a blazing fast, aesthetic and extensible neovim configuration with a r
 
 - **Neovim** ≥ 0.10
 - **Git**
-- A [Nerd Font](https://www.nerdfonts.com/) — required for icons in the tabline, statusline, and dashboard
+- A [Nerd Font](https://www.nerdfonts.com/) — optional but heavily recommended for icons tp render properly.
 - A terminal with [true color](https://github.com/termstandard/colors) support
 
 **Recommended:**
@@ -140,7 +136,7 @@ This work was heavily inspired from the following repositories:
 - [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 - [NvChad](https://github.com/NvChad/NvChad)
 
-Want to create your own personal nvim configuration? Take a look at [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) work.
+Want to create your own personal nvim configuration? Take a look at [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) repo.
 
 ## License
 
